@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+            if (sessionStorage.getItem('site_entered') && !isReload) {
+                document.documentElement.classList.add('skip-preloader');
+            }
+        })();
+    </script>
     <title>DTT - Portfolio</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,26 +22,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-logo">DTTJP<span>.com</span></div>
+    </div>
+
     <div class="blob-bg"></div>
     <div class="blob-bg blob-2"></div>
 
-    <nav class="glass-nav">
+    <nav class="glass-nav reveal-item">
         <div class="nav-container">
-            <a href="index.html" class="logo">DTT<span>.</span></a>
+            <a href="index.html" class="logo">DTTJP<span>.com</span></a>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="devices.html">Devices</a></li>
+                <li><a href="links.html">Links</a></li>
                 <li><button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button></li>
             </ul>
         </div>
     </nav>
 
-    <main>
+    <main class="reveal-content">
         <section class="hero glass-panel">
-            <div class="hero-content">
-                <h1 class="glitch-text" data-text="DTT">DTT</h1>
+            <div class="hero-content reveal-item">
+                <h1 class="logo-title" data-text="DTT">DTT</h1>
                 <p class="subtitle">High School Student & Otaku</p>
                 <div class="hero-desc">
                     <p>プログラミングやガジェットが好きな高校生です。</p>
@@ -49,12 +64,20 @@
                         <svg width="1em" height="1em" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 26c-5.522 0-10-4.478-10-10s4.478-10 10-10 10 4.478 10 10-4.478 10-10 10zm0-24C7.163 2 0 9.163 0 18s7.163 16 16 16c3.483 0 6.702-1.11 9.356-3.003l4.636 4.636c.78.78 2.048.78 2.828 0 .78-.78.78-2.048 0-2.828l-4.526-4.526C30.655 25.132 32 21.725 32 18 32 9.163 24.837 2 16 2z"/></svg>
                     </a>
                     <a href="https://www.xbox.com/ja-JP/play/user/DTT2025" target="_blank" class="social-btn" title="Xbox"><i class="fa-brands fa-xbox"></i></a>
+                    <a href="https://steamcommunity.com/id/dtt-jp/" target="_blank" class="social-btn" title="Steam"><i class="fa-brands fa-steam"></i></a>
+                    <a href="https://vrchat.com/home/user/usr_9ac71c3a-2a10-4cb0-ad0a-4bd305585274" target="_blank" class="social-btn vr-btn" title="VRChat">
+                        <span style="font-weight: 800; font-size: 0.9rem; font-family: var(--font-heading);">VR</span>
+                    </a>
+                    <div class="social-btn minecraft-btn" title="Minecraft ID">
+                        <i class="fa-solid fa-cube"></i>
+                        <span class="minecraft-id">DTTjp</span>
+                    </div>
                 </div>
             </div>
-            <div class="hero-image-container">
-                <!-- A simple CSS-based avatar/placeholder using the blue accent -->
+            <div class="hero-image-container reveal-item">
+                <!-- Profile Avatar with animated border -->
                 <div class="profile-avatar">
-                   <span class="avatar-letter">D</span>
+                   <img src="favicon.png" alt="DTT Avatar" class="avatar-img">
                 </div>
             </div>
         </section>

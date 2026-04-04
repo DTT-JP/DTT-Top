@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+            if (sessionStorage.getItem('site_entered') && !isReload) {
+                document.documentElement.classList.add('skip-preloader');
+            }
+        })();
+    </script>
+    <title>DTT - Links</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-logo">DTTJP<span>.com</span></div>
+    </div>
+
+    <div class="blob-bg"></div>
+    <div class="blob-bg blob-2"></div>
+
+    <nav class="glass-nav reveal-item">
+        <div class="nav-container">
+            <a href="index.html" class="logo">DTTJP<span>.com</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="devices.html">Devices</a></li>
+                <li><a href="links.html" class="active">Links</a></li>
+                <li><button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="link-tree-container reveal-content">
+        <div class="profile-header reveal-item">
+            <div class="profile-avatar">
+                <img src="favicon.png" alt="DTT Avatar" class="avatar-img">
+            </div>
+            <h2>DTT</h2>
+            <p class="subtitle">High School Student & Otaku</p>
+        </div>
+
+        <!-- Links List -->
+        <a href="https://github.com/DTT-JP" target="_blank" class="link-item reveal-item">
+            <div class="link-info">
+                <i class="fa-brands fa-github"></i>
+                <div>
+                   <div class="link-label">GitHub</div>
+                   <div class="link-id">DTT-JP</div>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <a href="https://x.com/dttjp_2025" target="_blank" class="link-item reveal-item">
+            <div class="link-info">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 1.2em; height: 1.2em; fill: currentColor;"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.6 318.1 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                <div>
+                   <div class="link-label">X (Twitter)</div>
+                   <div class="link-id">@dttjp_2025</div>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <a href="https://qiita.com/DTT-JP" target="_blank" class="link-item reveal-item">
+            <div class="link-info">
+                <svg width="1.2em" height="1.2em" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 26c-5.522 0-10-4.478-10-10s4.478-10 10-10 10 4.478 10 10-4.478 10-10 10zm0-24C7.163 2 0 9.163 0 18s7.163 16 16 16c3.483 0 6.702-1.11 9.356-3.003l4.636 4.636c.78.78 2.048.78 2.828 0 .78-.78.78-2.048 0-2.828l-4.526-4.526C30.655 25.132 32 21.725 32 18 32 9.163 24.837 2 16 2z"/></svg>
+                <div>
+                   <div class="link-label">Qiita</div>
+                   <div class="link-id">DTT-JP</div>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <a href="https://www.xbox.com/ja-JP/play/user/DTT2025" target="_blank" class="link-item reveal-item">
+            <div class="link-info">
+                <i class="fa-brands fa-xbox"></i>
+                <div>
+                   <div class="link-label">Xbox</div>
+                   <div class="link-id">DTT2025</div>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <a href="https://steamcommunity.com/id/dtt-jp/" target="_blank" class="link-item reveal-item">
+            <div class="link-info">
+                <i class="fa-brands fa-steam"></i>
+                <div>
+                   <div class="link-label">Steam</div>
+                   <div class="link-id">dtt-jp</div>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <a href="https://vrchat.com/home/user/usr_9ac71c3a-2a10-4cb0-ad0a-4bd305585274" target="_blank" class="link-item reveal-item">
+            <div class="link-info">
+                <span style="width: 24px; text-align: center; font-weight: 900; font-family: var(--font-heading); color: var(--accent-blue); font-size: 0.9rem;">VR</span>
+                <div>
+                   <div class="link-label">VRChat</div>
+                   <div class="link-id">DTT2025</div>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <a href="https://open.spotify.com/user/31naddsmmwm2u5yqzqdbdrju4wvi" target="_blank" class="link-item reveal-item">
+            <div class="link-info">
+                <i class="fa-brands fa-spotify"></i>
+                <div>
+                   <div class="link-label">Spotify</div>
+                   <div class="link-id">DTT</div>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <a href="https://www.youtube.com/channel/UCfSZuxJKwjdrbiZnHRuGz6Q" target="_blank" class="link-item reveal-item">
+            <div class="link-info">
+                <i class="fa-brands fa-youtube"></i>
+                <div>
+                   <div class="link-label">YouTube</div>
+                   <div class="link-id">DTT</div>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <div class="link-item reveal-item" style="cursor: default;">
+            <div class="link-info">
+                <i class="fa-solid fa-cube"></i>
+                <div>
+                   <div class="link-label">Minecraft (Java)</div>
+                   <div class="link-id">DTTjp</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>

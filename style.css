@@ -60,6 +60,79 @@ body {
     line-height: 1.6;
 }
 
+body.loading {
+    overflow: hidden;
+}
+
+.skip-preloader #preloader {
+    display: none !important;
+}
+
+/* ===== Preloader ===== */
+#preloader {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+#preloader.fade-out {
+    transform: translateY(-100%);
+}
+
+.loader-logo {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: -2px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loader-logo span {
+    color: var(--accent-blue);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.95); }
+}
+
+/* ===== Reveal Animations ===== */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.loaded .reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.loaded .glass-nav.reveal-item { transition-delay: 0.1s; }
+.loaded .hero-content.reveal-item { transition-delay: 0.3s; }
+.loaded .hero-image-container.reveal-item { transition-delay: 0.5s; }
+.loaded .page-title.reveal-item { transition-delay: 0.2s; }
+
+/* Staggered Delay for lists (Links, Cards, etc.) */
+.reveal-item:nth-child(1) { transition-delay: 0.1s; }
+.reveal-item:nth-child(2) { transition-delay: 0.2s; }
+.reveal-item:nth-child(3) { transition-delay: 0.3s; }
+.reveal-item:nth-child(4) { transition-delay: 0.4s; }
+.reveal-item:nth-child(5) { transition-delay: 0.5s; }
+.loaded .reveal-item:nth-child(6) { transition-delay: 0.6s; }
+.loaded .reveal-item:nth-child(7) { transition-delay: 0.7s; }
+.loaded .reveal-item:nth-child(8) { transition-delay: 0.8s; }
+.loaded .reveal-item:nth-child(9) { transition-delay: 0.9s; }
+.loaded .reveal-item:nth-child(10) { transition-delay: 1.0s; }
+
 /* Background Blobs for depth */
 .blob-bg {
     position: fixed;
@@ -310,6 +383,48 @@ h1, h2, h3, h4, .logo {
     box-shadow: 0 5px 15px var(--accent-glow);
 }
 
+.minecraft-btn {
+    position: relative;
+    cursor: help;
+}
+
+.minecraft-id {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--accent-blue);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.minecraft-id::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid var(--accent-blue);
+}
+
+.minecraft-btn:hover .minecraft-id,
+.minecraft-btn:active .minecraft-id {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
 .social-tag {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -335,12 +450,21 @@ h1, h2, h3, h4, .logo {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-blue), #8b5cf6);
+    background: var(--bg-color); /* Matches theme for clean border-gap */
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 40px var(--accent-glow);
     position: relative;
+    overflow: visible; /* Allow the animation outside */
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 2;
 }
 
 .profile-avatar::before {
@@ -350,14 +474,11 @@ h1, h2, h3, h4, .logo {
     border-radius: 50%;
     background: conic-gradient(from 0deg, transparent, var(--accent-blue), transparent 40%);
     animation: rotate 4s linear infinite;
-    z-index: -1;
+    z-index: 1;
 }
 
 .avatar-letter {
-    font-size: 6rem;
-    font-weight: 900;
-    font-family: var(--font-heading);
-    color: white;
+    display: none; /* No longer needed */
 }
 
 @keyframes rotate {
@@ -473,6 +594,84 @@ h1, h2, h3, h4, .logo {
 }
 
 /* ===== Responsive Design ===== */
+/* ===== Link Tree Layout ===== */
+.link-tree-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 8rem 1rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.profile-header .profile-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+}
+
+.profile-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.link-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.link-item:hover {
+    transform: scale(1.03);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.link-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.link-info i, .link-info svg {
+    font-size: 1.5rem;
+    color: var(--accent-blue);
+    width: 24px;
+    text-align: center;
+}
+
+.link-label {
+    font-weight: 700;
+    font-family: var(--font-heading);
+}
+
+.link-id {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.link-item i.fa-chevron-right {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
@@ -493,5 +692,9 @@ h1, h2, h3, h4, .logo {
     
     .social-links-hero {
         justify-content: center;
+    }
+
+    .link-item {
+        padding: 1rem 1.5rem;
     }
 }

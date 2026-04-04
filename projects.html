@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+            if (sessionStorage.getItem('site_entered') && !isReload) {
+                document.documentElement.classList.add('skip-preloader');
+            }
+        })();
+    </script>
     <title>DTT - Projects</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,28 +22,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-logo">DTTJP<span>.com</span></div>
+    </div>
+
     <div class="blob-bg"></div>
     <div class="blob-bg blob-2"></div>
 
-    <nav class="glass-nav">
+    <nav class="glass-nav reveal-item">
         <div class="nav-container">
-            <a href="index.html" class="logo">DTT<span>.</span></a>
+            <a href="index.html" class="logo">DTTJP<span>.com</span></a>
             <ul class="nav-links">
                 <li><a href="index.html">About</a></li>
                 <li><a href="projects.html" class="active">Projects</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="devices.html">Devices</a></li>
+                <li><a href="links.html">Links</a></li>
                 <li><button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button></li>
             </ul>
         </div>
     </nav>
 
-    <main class="page-content">
-        <h2 class="page-title">My Projects</h2>
+    <main class="page-content reveal-content">
+        <h2 class="page-title reveal-item">My Projects</h2>
         
         <div class="projects-grid">
             <!-- Project Card -->
-            <article class="glass-card project-card">
+            <article class="glass-card project-card reveal-item">
                 <div class="project-header">
                     <i class="fas fa-layer-group project-icon"></i>
                     <h3>Discord-to-OBS-nicoChat</h3>
