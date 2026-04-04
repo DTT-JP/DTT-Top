@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTT - Projects</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob-bg"></div>
+    <div class="blob-bg blob-2"></div>
+
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">DTT<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="devices.html">Devices</a></li>
+                <li><button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <h2 class="page-title">My Projects</h2>
+        
+        <div class="projects-grid">
+            <!-- Project Card -->
+            <article class="glass-card project-card">
+                <div class="project-header">
+                    <i class="fas fa-layer-group project-icon"></i>
+                    <h3>Discord-to-OBS-nicoChat</h3>
+                </div>
+                <div class="project-body">
+                    <p>Discordのチャットをニコニコ風にOBS上に流すツールです。配信画面をより楽しく、インタラクティブにカスタマイズできます。</p>
+                </div>
+                <div class="project-footer">
+                    <a href="https://d2obs.dttjp.com/" target="_blank" class="btn btn-primary">Website</a>
+                    <a href="https://github.com/DTT-JP/Discord-to-OBS-nicoChat" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </article>
+            
+            <!-- Placeholder for future projects -->
+             <article class="glass-card project-card dashed">
+                <div class="project-header">
+                    <i class="fas fa-plus project-icon"></i>
+                    <h3>More coming soon</h3>
+                </div>
+                <div class="project-body">
+                    <p>新しいプロジェクトを準備中です。</p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTT - Devices</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob-bg"></div>
+    <div class="blob-bg blob-2"></div>
+
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">DTT<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="devices.html" class="active">Devices</a></li>
+                <li><button id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <h2 class="page-title">My Devices</h2>
+        
+        <div class="devices-container">
+            
+            <section class="device-category">
+                <h3><i class="fas fa-desktop"></i> PCs & Laptops</h3>
+                <div class="devices-grid">
+                    <article class="glass-card device-card">
+                        <h4>メインPC</h4>
+                        <ul class="device-specs">
+                            <li><strong>CPU:</strong> Intel Core i7-4790</li>
+                            <li><strong>RAM:</strong> 16GB (DDR3-1600 8GBx2)</li>
+                            <li><strong>GPU:</strong> Intel HD Graphics 4600 / NVIDIA Quadro M2000</li>
+                            <li><strong>Storage:</strong> SATA SSD 500GB</li>
+                            <li><strong>OS:</strong> Windows 10 Pro</li>
+                        </ul>
+                    </article>
+
+                    <article class="glass-card device-card">
+                        <h4>サブPC</h4>
+                        <ul class="device-specs">
+                            <li><strong>CPU:</strong> Intel Core i7-5500U</li>
+                            <li><strong>RAM:</strong> 8GB (DDR3-1600 4GBx2)</li>
+                            <li><strong>GPU:</strong> Intel HD Graphics 5500</li>
+                            <li><strong>Storage:</strong> SATA SSD 256GB</li>
+                            <li><strong>OS:</strong> Windows 10 Home (TVチューナー搭載)</li>
+                        </ul>
+                    </article>
+
+                    <article class="glass-card device-card">
+                        <h4>ノートPC</h4>
+                        <ul class="device-specs">
+                            <li><strong>CPU:</strong> Intel Core i5-1135G7</li>
+                            <li><strong>RAM:</strong> 16GB (DDR4-3200 8GBx2)</li>
+                            <li><strong>GPU:</strong> Intel Iris Xe Graphics</li>
+                            <li><strong>Storage:</strong> NVMe SSD 256GB</li>
+                            <li><strong>OS:</strong> Windows 11 Pro</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="device-category">
+                <h3><i class="fas fa-server"></i> Servers</h3>
+                <div class="devices-grid">
+                    <article class="glass-card device-card">
+                        <h4>SVn1</h4>
+                        <ul class="device-specs">
+                            <li><strong>CPU:</strong> Intel Core i7-2670QM</li>
+                            <li><strong>RAM:</strong> 8GB (DDR3-1333 4GBx2)</li>
+                            <li><strong>GPU:</strong> Intel HD Graphics 3000</li>
+                            <li><strong>Storage:</strong> SATA HDD 320GB</li>
+                            <li><strong>OS:</strong> Debian 13 (CUI)</li>
+                        </ul>
+                    </article>
+
+                    <article class="glass-card device-card">
+                        <h4>Pve01</h4>
+                        <ul class="device-specs">
+                            <li><strong>CPU:</strong> Intel Core i3-4160</li>
+                            <li><strong>RAM:</strong> 12GB (DDR3-1600 8GB+4GB)</li>
+                            <li><strong>GPU:</strong> Intel HD Graphics 4400</li>
+                            <li><strong>Storage:</strong> SATA HDD 500GB + 1TB</li>
+                            <li><strong>OS:</strong> Proxmox VE 9</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="device-category">
+                <h3><i class="fas fa-mobile-alt"></i> Mobile & Peripherals</h3>
+                <div class="devices-grid">
+                    <article class="glass-card device-card">
+                        <h4>スマホ</h4>
+                        <p class="device-desc">AQUOS wish 3 (通称: Gomios)</p>
+                    </article>
+                    <article class="glass-card device-card">
+                        <h4>キーボード</h4>
+                        <p class="device-desc">電気屋にあった安いやつ</p>
+                    </article>
+                    <article class="glass-card device-card">
+                        <h4>マウス</h4>
+                        <p class="device-desc">ダイソーにあった安いやつ</p>
+                    </article>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
