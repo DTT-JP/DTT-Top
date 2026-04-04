@@ -53,23 +53,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const siteEntered = sessionStorage.getItem('site_entered');
     const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
 
-    window.addEventListener('load', () => {
+    function startEntranceSequence() {
+        if (body.classList.contains('loaded')) return; // Already started
+
         if (preloader) {
             if (siteEntered && !isReload) {
-                // Skip full animation on internal navigation
                 preloader.style.display = 'none';
                 body.classList.remove('loading');
                 body.classList.add('loaded');
             } else {
-                // Full entrance sequence for first-time arrival OR reload
                 setTimeout(() => {
                     preloader.classList.add('fade-out');
                     body.classList.remove('loading');
                     body.classList.add('loaded');
-                    
                     sessionStorage.setItem('site_entered', 'true');
-
-                    // Remove preloader from DOM after transition
                     setTimeout(() => {
                         preloader.style.display = 'none';
                     }, 800);
@@ -78,7 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             body.classList.add('loaded');
         }
-    });
+    }
+
+    // Trigger on load OR safety timeout
+    window.addEventListener('load', startEntranceSequence);
+    setTimeout(startEntranceSequence, 2000); // 2s Safety fallback
 
     // Glitch effect removed as requested
 });
