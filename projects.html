@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        (function() {
+        (function () {
             const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
             if (sessionStorage.getItem('site_entered') && !isReload) {
                 document.documentElement.classList.add('skip-preloader');
@@ -16,11 +17,14 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap"
+        rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Preloader -->
     <div id="preloader">
@@ -46,8 +50,8 @@
 
     <main class="page-content reveal-content">
         <h2 class="page-title reveal-item">My Projects</h2>
-        
-        <div class="projects-grid">
+
+        <div class="common-grid">
             <!-- Project Card -->
             <article class="glass-card project-card reveal-item">
                 <div class="project-header">
@@ -59,12 +63,13 @@
                 </div>
                 <div class="project-footer">
                     <a href="https://d2obs.dttjp.com/" target="_blank" class="btn btn-primary">Website</a>
-                    <a href="https://github.com/DTT-JP/Discord-to-OBS-nicoChat" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://github.com/DTT-JP/Discord-to-OBS-nicoChat" target="_blank"
+                        class="btn btn-secondary"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </article>
-            
+
             <!-- Placeholder for future projects -->
-             <article class="glass-card project-card dashed">
+            <article class="glass-card project-card dashed">
                 <div class="project-header">
                     <i class="fas fa-plus project-icon"></i>
                     <h3>More coming soon</h3>
@@ -76,6 +81,19 @@
         </div>
     </main>
 
+    <footer class="glass-footer reveal-item">
+        <div class="footer-content">
+            <p>&copy; 2026 DTTJP.com</p>
+            <div class="mode-switcher">
+                <span>Display Mode:</span>
+                <a href="projects.html" class="active">Modern (2014-2026+)</a>
+                <a href="s/projects.html">Retro (IE4+)</a>
+                <a href="ss/projects.html">Vintage (Pre-IE4)</a>
+            </div>
+        </div>
+    </footer>
+
     <script src="main.js"></script>
 </body>
+
 </html>
