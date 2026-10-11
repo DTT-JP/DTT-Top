@@ -1,0 +1,17 @@
+{
+  "name": "dtt-top",
+  "version": "2.0.0",
+  "private": true,
+  "description": "DTTJP.com ポートフォリオサイト（content/*.yml から静的HTMLを生成）",
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "check": "node src/build.mjs --check"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

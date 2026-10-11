@@ -1,0 +1,98 @@
+# ============================================================
+#  デバイス一覧
+#  kind: specs … スペック表示（specs: に「項目名: 値」を並べる。項目は自由に増減OK）
+#  kind: simple … 名前 + 一言説明（desc:）
+#  レトロ版・ヴィンテージ版にも自動で反映されます。
+# ============================================================
+
+categories:
+  - id: pc
+    title: PCs & Laptops
+    title_ja: PC・ノートブック
+    icon: fa-solid fa-desktop
+    kind: specs
+    items:
+      - name: メインPC
+        specs:
+          CPU: Intel Core i7-4790
+          RAM: 16GB (DDR3-1600 8GBx2)
+          GPU: Intel HD Graphics 4600 / NVIDIA Quadro M2000
+          Storage: SATA SSD 500GB
+          OS: Windows 10 Pro 22H2
+      - name: サブPC
+        specs:
+          CPU: Intel Core i7-5500U
+          RAM: 8GB (DDR3-1600 4GBx2)
+          GPU: Intel HD Graphics 5500
+          Storage: SATA SSD 256GB
+          OS: Windows 11 Home 26H2
+      - name: ノートPC
+        specs:
+          CPU: Intel Core i5-1135G7
+          RAM: 24GB (DDR4-3200 16GB+8GB)
+          GPU: Intel Iris Xe Graphics
+          Storage: NVMe SSD 256GB
+          OS: Windows 11 Pro 26H2
+
+  - id: server
+    title: Servers
+    title_ja: サーバー
+    icon: fa-solid fa-server
+    kind: specs
+    items:
+      - name: Iroha(自宅鯖)
+        specs:
+          CPU: Intel Core i7-2670QM
+          RAM: 8GB (DDR3-1333 4GBx2)
+          GPU: Intel HD Graphics 3000
+          Storage: SATA HDD 320GB
+          OS: Debian 13
+      - name: Kaguya(自宅鯖)
+        specs:
+          CPU: Intel Core i3-4160
+          RAM: 12GB (DDR3-1600 8GB+4GB)
+          GPU: Intel HD Graphics 4400
+          Storage: SATA HDD 500GB
+          Data Storage: SATA HDD 500GB
+          OS: Proxmox VE 9
+      - name: oci-arm01(VPS)
+        specs:
+          CPU: Oracle Ampere A1 4OCPU
+          RAM: 24GB
+          Storage: BlockStorage 100GB
+          OS: Ubuntu 24.04 LTS
+      - name: oci-amd01(VPS)
+        specs:
+          CPU: Oracle E2.1.Micro 1OCPU
+          RAM: 1GB
+          Storage: BlockStorage 50GB
+          OS: Ubuntu 24.04 LTS
+      - name: oci-amd02(VPS)
+        specs:
+          CPU: Oracle E2.1.Micro 1OCPU
+          RAM: 1GB
+          Storage: BlockStorage 50GB
+          OS: Ubuntu 24.04 LTS
+
+  - id: gadget
+    title: Mobile & Gadgets
+    title_ja: モバイル・その他
+    icon: fa-solid fa-mobile-screen-button
+    kind: simple
+    items:
+      - name: スマホ
+        desc: "AQUOS wish 3 (通称: Gomios)"
+      - name: iPad
+        desc: iPad A16 Wi-Fi + Cellularモデル 128GB
+      - name: スタイラスペン
+        desc: iPadタッチペン（非純正）
+      - name: NewNintendo2DSLL
+        desc: 携帯ゲーム機
+      - name: チャレンジパッド3
+        desc: 学習用タブレット (Android化・GAS導入済み) 最近壊れたかも
+      - name: チャレンジパッドNext
+        desc: 学習用タブレット (ペン付き・Android化・GAS導入済み) 目覚まし時計化してる
+      - name: モバイルバッテリー
+        desc: UGREEN 45w 20000mAh
+      - name: VR HMD
+        desc: Oculus Rift S

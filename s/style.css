@@ -1,0 +1,172 @@
+/* このファイルは自動生成されています。直接編集せず content/ か src/ を編集してください。 元: src/assets/retro/style.css */
+/* ==========================================================
+   DTTJP.com — レトロ版（IE4+）スタイル
+   Windows 98 / Internet Explorer 4 風。
+   古いブラウザで動くよう、CSS1 の範囲（+ 新しいブラウザ向けのおまけ）だけで書いています。
+   色の約束:  #C0C0C0 ボタンの灰色 / #000080 タイトルバーの紺 / #008080 デスクトップの青緑
+   ========================================================== */
+
+body {
+  margin: 0;
+  padding: 18px 8px 28px 8px;
+  background: #008080;
+  color: #000000;
+  font-family: "MS PGothic", "MS UI Gothic", "Hiragino Kaku Gothic Pro", "Osaka", Meiryo, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+td, th, p, li { font-family: "MS PGothic", "MS UI Gothic", "Hiragino Kaku Gothic Pro", "Osaka", Meiryo, sans-serif; font-size: 14px; }
+
+a:link, a:visited { color: #0000EE; }
+a:active { color: #FF0000; }
+a:focus { outline: 1px dotted #000000; }
+
+img { border: 0; }
+p { margin: 0 0 10px 0; }
+.small, .small a { font-size: 12px; }
+.gap { height: 10px; line-height: 10px; font-size: 1px; }
+
+/* ----- ウィンドウ本体（盛り上がった枠） ----- */
+table.win {
+  width: 760px;
+  max-width: 100%;
+  background: #C0C0C0;
+  border: 2px solid;
+  border-color: #FFFFFF #000000 #000000 #FFFFFF;
+}
+td.win-in {
+  padding: 2px;
+  background: #C0C0C0;
+  border: 1px solid;
+  border-color: #DFDFDF #808080 #808080 #DFDFDF;
+}
+
+/* ----- タイトルバー ----- */
+td.titlebar {
+  padding: 3px 4px;
+  background: #000080;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: bold;
+}
+td.titlebar { background-image: linear-gradient(90deg, #000080, #1084D0); } /* 新しいブラウザだけグラデーション */
+
+.tbtn {
+  display: inline-block;
+  width: 16px;
+  height: 14px;
+  margin-left: 2px;
+  background: #C0C0C0;
+  color: #000000;
+  border: 1px solid;
+  border-color: #FFFFFF #000000 #000000 #FFFFFF;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ----- ツールバー / アドレスバー ----- */
+table.bar98 { background: #C0C0C0; border-bottom: 1px solid #808080; }
+td.addr-label { color: #000000; font-size: 13px; padding-right: 6px; }
+.addr {
+  background: #FFFFFF;
+  color: #000000;
+  padding: 2px 6px;
+  border: 2px solid;
+  border-color: #808080 #FFFFFF #FFFFFF #808080;
+  font-family: "MS Gothic", "Courier New", monospace;
+  font-size: 13px;
+  overflow: hidden;
+}
+
+/* ----- ボタン（盛り上がり / 押し込み） ----- */
+a.btn98, a.btn98:link, a.btn98:visited, span.btn98 {
+  display: inline-block;
+  margin: 0 2px 4px 0;
+  padding: 3px 10px;
+  background: #C0C0C0;
+  color: #000000;
+  border: 2px solid;
+  border-color: #FFFFFF #404040 #404040 #FFFFFF;
+  font-size: 13px;
+  text-decoration: none;
+}
+a.btn98:active {
+  padding: 4px 9px 2px 11px;
+  border-color: #404040 #FFFFFF #FFFFFF #404040;
+  color: #000000;
+}
+a.btn98-on, a.btn98-on:link, a.btn98-on:visited, span.btn98-on {
+  padding: 4px 9px 2px 11px;
+  border-color: #404040 #FFFFFF #FFFFFF #404040;
+  background: #D8D8D8;
+  font-weight: bold;
+  color: #000000;
+}
+
+/* ----- ページ本体（へこんだ白い領域） ----- */
+td.content {
+  padding: 16px 20px 12px 20px;
+  background: #FFFFFF;
+  border: 2px solid;
+  border-color: #808080 #FFFFFF #FFFFFF #808080;
+  vertical-align: top;
+}
+
+h1.pagetitle {
+  margin: 0 0 14px 0;
+  padding: 0 0 4px 0;
+  border-bottom: 2px solid #000080;
+  color: #000080;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+h2.bar {
+  margin: 18px 0 10px 0;
+  padding: 3px 8px;
+  background: #000080;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.marq {
+  display: block;
+  margin: 0 0 14px 0;
+  padding: 3px 0;
+  background: #000000;
+  color: #00FF00;
+  font-family: "MS Gothic", "Courier New", monospace;
+  font-size: 13px;
+}
+
+/* ----- 項目の枠（プロジェクト / サービス / デバイス） ----- */
+table.item { border: 1px solid #808080; }
+td.item-h { padding: 4px 10px; background: #C0C0C0; color: #000000; font-size: 15px; border-bottom: 1px solid #808080; }
+td.item-b { padding: 10px 12px 2px 12px; background: #FFFFFF; }
+
+/* ----- 表（スペック / リンク集） ----- */
+table.grid { border: 1px solid #808080; border-collapse: collapse; }
+table.grid td { border: 1px solid #C0C0C0; vertical-align: top; }
+td.k { background: #EFEFEF; color: #000000; }
+td.v { background: #FFFFFF; color: #000000; }
+td.th { background: #C0C0C0; color: #000000; font-weight: bold; }
+
+hr { color: #808080; background: #808080; height: 2px; border: 0; margin: 18px 0 12px 0; }
+
+.sunk-img { border: 2px solid; border-color: #808080 #FFFFFF #FFFFFF #808080; background: #FFFFFF; }
+
+/* ----- ステータスバー ----- */
+td.status {
+  padding: 2px 4px;
+  background: #C0C0C0;
+  color: #000000;
+  border: 1px solid;
+  border-color: #808080 #FFFFFF #FFFFFF #808080;
+  font-size: 12px;
+}
+
+p.foot { margin-top: 16px; color: #FFFFFF; font-size: 12px; line-height: 1.5; text-align: center; }

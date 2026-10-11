@@ -1,0 +1,42 @@
+# ============================================================
+#  SNS・アカウント一覧（上から順に表示されます）
+#  icon : Font Awesome のクラス名 / "svg:x" "svg:qiita"（内蔵SVG）/ "text:VR"（文字アイコン）
+#  url  : 無いものは「ID表示のみ」（通常版ではクリックでIDをコピー）
+# ============================================================
+
+links:
+  - label: GitHub
+    handle: DTT-JP
+    url: https://github.com/DTT-JP
+    icon: fa-brands fa-github
+  - label: X (Twitter)
+    handle: "@dttjp_2025"
+    url: https://x.com/dttjp_2025
+    icon: svg:x
+  - label: Qiita
+    handle: DTT-JP
+    url: https://qiita.com/DTT-JP
+    icon: svg:qiita
+  - label: Xbox
+    handle: DTT2025
+    url: https://www.xbox.com/ja-JP/play/user/DTT2025
+    icon: fa-brands fa-xbox
+  - label: Steam
+    handle: dtt-jp
+    url: https://steamcommunity.com/id/dtt-jp/
+    icon: fa-brands fa-steam
+  - label: VRChat
+    handle: DTT2025
+    url: https://vrchat.com/home/user/usr_9ac71c3a-2a10-4cb0-ad0a-4bd305585274
+    icon: text:VR
+  - label: Spotify
+    handle: DTT
+    url: https://open.spotify.com/user/31naddsmmwm2u5yqzqdbdrju4wvi
+    icon: fa-brands fa-spotify
+  - label: YouTube
+    handle: DTT
+    url: https://www.youtube.com/channel/UCfSZuxJKwjdrbiZnHRuGz6Q
+    icon: fa-brands fa-youtube
+  - label: Minecraft (Java)
+    handle: DTTjp
+    icon: fa-solid fa-cube
