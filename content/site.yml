@@ -14,7 +14,7 @@ site:
 profile:
   name: DTT
   subtitle: High School Student & Otaku
-  intro: プログラミングやガジェットが好きな高校生です。
+  intro: プログラミングやガジェットが好きな一般的な高校生です。
 
 # ---------- ナビゲーション（= ページ一覧） ----------
 #  label     : 通常版のメニュー名 / レトロ版のボタン名（英語）
@@ -81,7 +81,7 @@ modes:
     label: Retro
     period: IE4+
     label_ja: レトロ版 (IE4+)
-    window_title: Microsoft Internet Explorer   # タイトルバー右側に付く文字
+    window_title: Retro Web Browser   # タイトルバー右側に付く文字
     marquee: ★ DTTJP.com へようこそ！ ★ レトロ版アーカイブ公開中 ★
     about_heading: レトロ版アーカイブへようこそ！
     about:
