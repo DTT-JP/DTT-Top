@@ -1,28 +1,45 @@
 # ============================================================
-#  サイト全体の設定（名前・ナビ・各表示モードの文言）
-#  編集したら commit するだけで、GitHub Actions が自動で HTML を作り直します。
+#  サイト全体の設定（名前・ナビ・共通の自己紹介・各モードの一言）
+#  編集したら  npm run build  で HTML を作り直してください。
 # ============================================================
 
 site:
   name: DTTJP            # ロゴの左側
   tld: .com              # ロゴの右側（色が変わる部分）
   title: DTT - Portfolio # トップページの <title>
-  description: 高校生 DTT のポートフォリオ。作ったサービス、使っているデバイス、SNS をまとめています。
+  description: 高校生 DTT のポートフォリオ。制作物・使える技術・使っているデバイス・SNS をまとめています。
   copyright_year: 2026
+  updated: "2026-10-12"  # 最終更新日（レトロ版に表示）。サイトを更新したら書き換える
   favicon: favicon.png
 
+# ---------- 自己紹介（3つのモードで共通） ----------
 profile:
   name: DTT
   subtitle: High School Student & Otaku
-  intro: プログラミングやガジェットが好きな一般的な高校生です。
+  intro: プログラミングやガジェットが好きな高校生です。
+  about:
+    - 日本の現役高校生で、テクノロジーとオタク文化をこよなく愛しています。
+    - Web サービスやツールを作って公開したり、自宅サーバーやクラウド上で動かしたりしています。
+
+# ---------- トップ（About）ページ内のセクション見出し ----------
+sections:
+  about:
+    title: About
+    ja: 自己紹介
+  skills:
+    title: Tech Stack
+    ja: 使える技術
+    lead: 普段使っている言語・インフラ・ツール・アプリです。
+  links:
+    title: Links
+    ja: SNS・アカウント
 
 # ---------- ナビゲーション（= ページ一覧） ----------
-#  label     : 通常版のメニュー名 / レトロ版のボタン名（英語）
+#  label     : 通常版のメニュー名
 #  label_ja  : レトロ版・ヴィンテージ版の日本語名
 #  title     : 通常版のページ見出し
 #  heading_ja: レトロ版・ヴィンテージ版のページ見出し
 #  icon      : Font Awesome のクラス名
-#  desc      : 通常版トップの「Explore」カードに出す説明
 nav:
   - id: index
     file: index.html
@@ -31,25 +48,14 @@ nav:
     title: About
     heading_ja: 自己紹介
     icon: fa-solid fa-user
-    desc: プロフィールと SNS
-  - id: projects
-    file: projects.html
-    label: Projects
-    label_ja: プロジェクト
-    title: My Projects
-    heading_ja: プロジェクト紹介
-    icon: fa-solid fa-diagram-project
-    desc: 開発しているツールやアプリ
-    lead: 開発しているツールやアプリの紹介です。
-  - id: services
-    file: services.html
-    label: Services
-    label_ja: サービス
-    title: Services
-    heading_ja: Webサービス一覧
+  - id: works
+    file: works.html
+    label: Works
+    label_ja: 制作物
+    title: Works
+    heading_ja: 制作物
     icon: fa-solid fa-cubes
-    desc: 公開中の Web サービス
-    lead: ブラウザですぐ使える、公開中の Web サービスです。
+    lead: これまでに作ったものの一覧です。
   - id: devices
     file: devices.html
     label: Devices
@@ -57,45 +63,36 @@ nav:
     title: My Devices
     heading_ja: デバイス・スペック一覧
     icon: fa-solid fa-microchip
-    desc: PC・サーバー・ガジェット
-    lead: 普段使っている PC、サーバー、ガジェットの一覧です。
-  - id: links
-    file: links.html
-    label: Links
-    label_ja: リンク集
-    title: Links
-    heading_ja: SNS・リンク一覧
-    icon: fa-solid fa-link
-    desc: SNS・ゲームアカウント
+    lead: 普段使っている PC、サーバー、ガジェットと、その用途です。
+
+# ---------- 旧URLからの転送（古いリンクが 404 にならないように） ----------
+#  「旧ファイル名: 転送先」。全モードに転送ページを作ります。不要になったら消してOK。
+redirects:
+  projects.html: works.html
+  services.html: works.html
+  links.html: index.html#links
 
 # ---------- 表示モード ----------
 #  dir が空ならサイト直下、s なら /s/、ss なら /ss/ に出力されます。
+#  message … そのモードならではの一言だけをここに書く（自己紹介は上の profile で共通）
 modes:
   - id: modern
     dir: ""
     label: Modern
     period: 2014-2026+
     label_ja: 現代版 (2026)
+    message: ページ下の Display Mode から、昔のホームページ風の表示にも切り替えられます。
   - id: retro
     dir: s
     label: Retro
-    period: IE4+
-    label_ja: レトロ版 (IE4+)
-    window_title: Retro Web Browser   # タイトルバー右側に付く文字
-    marquee: ★ DTTJP.com へようこそ！ ★ レトロ版アーカイブ公開中 ★
-    about_heading: レトロ版アーカイブへようこそ！
-    about:
-      - こんにちは！DTT です。日本の現役高校生で、テクノロジーとオタク文化をこよなく愛しています。
-      - このページは、モダンな CSS（Grid や Flexbox）に対応していない古いブラウザ向けに特別に設計されています。Internet Explorer 4.0 や Netscape Navigator 4.0 といった 2000 年前後の環境でも、崩れずに表示できるように作られています。
-      - 上のボタンから、私のプロジェクトや所有しているデバイス、便利なリンク集などを閲覧できます。
+    period: 2000年前後
+    label_ja: レトロ版 (2000年前後)
+    message: このページは、2000年前後の個人ホームページを再現したレトロ版です。
+    marquee: ★ DTTJP.com へようこそ！ ★ ご来訪ありがとうございます ★
   - id: vintage
     dir: ss
     label: Vintage
     period: Pre-IE4
     label_ja: ヴィンテージ版 (Pre-IE4)
+    message: このページは、CSS を使わない極めて古いブラウザ向けのヴィンテージ版です。
     welcome: 個人ホームページへようこそ
-    about_heading: DTTについて
-    about:
-      - 私の名前は DTT です。日本の高校生で、技術やガジェットが大好きなオタクです。
-      - このウェブサイトは、Netscape Navigator 2.0 や初期の Mosaic といった、極めて古いブラウザ向けに最適化されています。CSS を使わず、基本的な HTML タグのみで構成されています。
-      - 上のリンクから各セクションを選んで、私の活動や所有しているデバイスについて詳しく知ることができます。

@@ -1,5 +1,5 @@
 // 通常版（現代版）テンプレート
-import { esc, icon, host, modeHref, GENERATED_NOTE } from '../lib.mjs';
+import { esc, icon, host, primaryUrl, modeHref, GENERATED_NOTE } from '../lib.mjs';
 
 // ---------- 小さな部品 ----------
 const ext = '<i class="fa-solid fa-arrow-up-right-from-square btn-ext" aria-hidden="true"></i>';
@@ -7,6 +7,9 @@ const delay = (n) => `style="--i:${n}"`;
 
 const iconTile = (spec, small = false) =>
   `<span class="icon-tile${small ? ' icon-tile-sm' : ''}">${icon(spec)}</span>`;
+
+const chips = (items = []) =>
+  items.length ? `<ul class="chips">${items.map((t) => `<li class="chip">${esc(t)}</li>`).join('')}</ul>` : '';
 
 function pageHead({ eyebrow, title, lead }) {
   return `
@@ -16,43 +19,82 @@ function pageHead({ eyebrow, title, lead }) {
     </header>`;
 }
 
-function comingSoon(card, n) {
-  if (!card) return '';
+/** トップのセクション（見出し + 中身） */
+function block(id, sec, inner) {
   return `
-      <article class="card card-dashed reveal" ${delay(n)}>
-        ${iconTile('fa-solid fa-plus')}
-        <h3>${esc(card.title)}</h3>
-        <p class="item-desc">${esc(card.desc)}</p>
-      </article>`;
+    <section class="block" id="${id}" aria-labelledby="${id}-title">
+      <header class="block-head reveal" ${delay(0)}>
+        <p class="eyebrow">${esc(sec.ja)}</p>
+        <h2 id="${id}-title">${esc(sec.title)}</h2>${sec.lead ? `\n        <p class="lead">${esc(sec.lead)}</p>` : ''}
+      </header>
+      ${inner}
+    </section>`;
 }
 
-function socialButton(link) {
-  const label = esc(link.label);
-  if (link.url) {
-    return `<li><a class="social-btn" href="${esc(link.url)}" target="_blank" rel="noopener noreferrer" aria-label="${label}" data-tip="${label}">${icon(link.icon)}</a></li>`;
-  }
-  const handle = esc(link.handle);
-  return `<li><button type="button" class="social-btn" data-copy="${handle}" aria-label="${label}: ${handle}（クリックでコピー）" data-tip="${label}: ${handle}">${icon(link.icon)}</button></li>`;
-}
-
-const avatar = (cls = '') =>
-  `<div class="avatar ${cls}"><img src="favicon.png" alt="DTT のアイコン" width="232" height="232"></div>`;
+const avatar = () =>
+  `<div class="avatar"><img src="favicon.png" alt="DTT のアイコン" width="232" height="232"></div>`;
 
 // ---------- 各ページの中身 ----------
 export const pages = {
-  index({ profile, links, nav }) {
-    const explore = nav
+  index({ profile, sections, skills, links, nav, mode }) {
+    const ctas = nav
       .filter((n) => n.id !== 'index')
       .map(
-        (n, i) => `
-        <a class="card tile reveal" href="${esc(n.file)}" ${delay(i + 3)}>
-          ${iconTile(n.icon)}
-          <span class="tile-title">${esc(n.label)}</span>
-          <span class="tile-desc">${esc(n.desc)}</span>
-          <i class="fa-solid fa-arrow-right tile-go" aria-hidden="true"></i>
-        </a>`,
+        (n, i) =>
+          `<a class="btn ${i === 0 ? 'btn-primary' : 'btn-ghost'}" href="${esc(n.file)}"><i class="${esc(n.icon)}" aria-hidden="true"></i>${esc(n.label)}</a>`,
       )
+      .join('\n          ');
+
+    const anchors = ['about', 'skills', 'links']
+      .map((id) => `<a class="anchor" href="#${id}">${esc(sections[id].title)}</a>`)
       .join('');
+
+    const aboutInner = `
+      <div class="card prose reveal" ${delay(1)}>
+        ${profile.about.map((t) => `<p>${esc(t)}</p>`).join('\n        ')}
+        ${mode.message ? `<p class="note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>${esc(mode.message)}</span></p>` : ''}
+      </div>`;
+
+    const skillsInner = `
+      <div class="skill-grid">${skills
+        .map(
+          (c, i) => `
+        <article class="card skill reveal" ${delay(i + 1)}>
+          <div class="skill-head">
+            ${iconTile(c.icon, true)}
+            <div><h3>${esc(c.title)}</h3><p class="skill-en">${esc(c.en)}</p></div>
+          </div>
+          ${chips(c.items)}
+        </article>`,
+        )
+        .join('')}
+      </div>`;
+
+    const linksInner = `
+      <ul class="link-list">${links
+        .map((l, i) => {
+          const body = `
+            ${iconTile(l.icon)}
+            <span class="link-text">
+              <span class="link-label">${esc(l.label)}</span>
+              <span class="link-handle">${esc(l.handle)}</span>
+            </span>`;
+          return l.url
+            ? `
+        <li class="reveal" ${delay(i + 1)}>
+          <a class="link-item" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${body}
+            <i class="fa-solid fa-arrow-up-right-from-square link-go" aria-hidden="true"></i>
+          </a>
+        </li>`
+            : `
+        <li class="reveal" ${delay(i + 1)}>
+          <button type="button" class="link-item" data-copy="${esc(l.handle)}" aria-label="${esc(l.label)} のIDをコピー">${body}
+            <i class="fa-regular fa-copy link-go" aria-hidden="true"></i>
+          </button>
+        </li>`;
+        })
+        .join('')}
+      </ul>`;
 
     return `
     <section class="hero">
@@ -60,70 +102,60 @@ export const pages = {
         <p class="eyebrow reveal" ${delay(0)}><span class="dot" aria-hidden="true"></span>${esc(profile.subtitle)}</p>
         <h1 class="hero-title reveal" ${delay(1)}>${esc(profile.name)}</h1>
         <p class="hero-lead reveal" ${delay(2)}>${esc(profile.intro)}</p>
-        <ul class="social reveal" ${delay(3)}>
-          ${links.map(socialButton).join('\n          ')}
-        </ul>
+        <div class="hero-actions reveal" ${delay(3)}>
+          ${ctas}
+        </div>
       </div>
       <div class="hero-visual reveal" ${delay(2)}>
         ${avatar()}
       </div>
     </section>
 
-    <section class="explore" aria-labelledby="explore-title">
-      <h2 class="section-label reveal" id="explore-title" ${delay(2)}>Explore</h2>
-      <div class="tile-grid">${explore}
-      </div>
-    </section>`;
+    <nav class="anchors reveal" aria-label="ページ内リンク" ${delay(3)}>${anchors}</nav>
+    ${block('about', sections.about, aboutInner)}
+    ${block('skills', sections.skills, skillsInner)}
+    ${block('links', sections.links, linksInner)}`;
   },
 
-  projects({ page, projects, coming_soon }) {
-    const cards = projects
-      .map((p, i) => {
-        const actions = (p.links ?? [])
+  works({ page, works, coming_soon }) {
+    const cards = works
+      .map((w, i) => {
+        const url = primaryUrl(w);
+        const actions = (w.links ?? [])
           .map(
             (l) =>
               `<a class="btn btn-${l.kind === 'primary' ? 'primary' : 'ghost'}" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${l.icon ? `<i class="${esc(l.icon)}" aria-hidden="true"></i>` : ''}${esc(l.label)}${l.icon ? '' : ext}</a>`,
           )
-          .join('\n            ');
+          .join('\n          ');
         return `
       <article class="card item reveal" ${delay(i + 1)}>
         <div class="item-head">
-          ${iconTile(p.icon)}
-          <h3>${esc(p.title)}</h3>
+          ${iconTile(w.icon)}
+          <div>
+            <h3>${esc(w.title)}</h3>${url ? `\n            <p class="item-meta"><span class="item-host">${esc(host(url))}</span></p>` : ''}
+          </div>
         </div>
-        <p class="item-desc">${esc(p.desc)}</p>
+        <p class="item-desc">${esc(w.desc)}</p>
+        ${chips(w.tech)}
+        ${w.background ? `<details class="more"><summary>背景・仕組み</summary><p>${esc(w.background)}</p></details>` : ''}
         <div class="item-actions">
           ${actions}
         </div>
       </article>`;
       })
       .join('');
-    return `${pageHead({ eyebrow: page.label, title: page.title, lead: page.lead })}
-    <div class="card-grid">${cards}${comingSoon(coming_soon, projects.length + 1)}
-    </div>`;
-  },
 
-  services({ page, services, coming_soon }) {
-    const cards = services
-      .map(
-        (s, i) => `
-      <article class="card item reveal" ${delay(i + 1)}>
-        <div class="item-head">
-          ${iconTile(s.icon)}
-          <div>
-            <h3>${esc(s.title)}</h3>
-            <p class="item-host">${esc(host(s.url))}</p>
-          </div>
-        </div>
-        <p class="item-desc">${esc(s.desc)}</p>
-        <div class="item-actions">
-          <a class="btn btn-primary" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">Go to Service${ext}</a>
-        </div>
-      </article>`,
-      )
-      .join('');
+    const soon = coming_soon
+      ? `
+      <article class="card card-dashed reveal" ${delay(works.length + 1)}>
+        ${iconTile('fa-solid fa-plus')}
+        <h3>${esc(coming_soon.title)}</h3>
+        <p class="item-desc">${esc(coming_soon.desc)}</p>
+      </article>`
+      : '';
+
     return `${pageHead({ eyebrow: page.label, title: page.title, lead: page.lead })}
-    <div class="card-grid">${cards}${comingSoon(coming_soon, services.length + 1)}
+    <div class="card-grid">${cards}${soon}
     </div>`;
   },
 
@@ -132,20 +164,18 @@ export const pages = {
       .map((cat, ci) => {
         const items = cat.items
           .map((it) => {
-            if (cat.kind === 'simple') {
-              return `
-          <article class="card device">
-            <h3>${esc(it.name)}</h3>
-            <p class="device-desc">${esc(it.desc)}</p>
-          </article>`;
-            }
-            const rows = Object.entries(it.specs)
-              .map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`)
-              .join('');
+            const head = `
+            <div class="device-head">
+              <h3>${esc(it.name)}</h3>${it.role ? `\n              <p class="device-role">${esc(it.role)}</p>` : ''}${it.desc ? `\n              <p class="device-desc">${esc(it.desc)}</p>` : ''}
+            </div>`;
+            const specs = it.specs
+              ? `<dl class="specs">${Object.entries(it.specs)
+                  .map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`)
+                  .join('')}</dl>`
+              : '';
             return `
-          <article class="card device">
-            <h3>${esc(it.name)}</h3>
-            <dl class="specs">${rows}</dl>
+          <article class="card device${it.specs ? '' : ' device-plain'}">${head}
+            ${specs}
           </article>`;
           })
           .join('');
@@ -160,43 +190,6 @@ export const pages = {
     return `${pageHead({ eyebrow: page.label, title: page.title, lead: page.lead })}
     <div class="device-list">${sections}
     </div>`;
-  },
-
-  links({ profile, links }) {
-    const items = links
-      .map((l, i) => {
-        const body = `
-            ${iconTile(l.icon)}
-            <span class="link-text">
-              <span class="link-label">${esc(l.label)}</span>
-              <span class="link-handle">${esc(l.handle)}</span>
-            </span>`;
-        if (l.url) {
-          return `
-          <li class="reveal" ${delay(i + 1)}>
-            <a class="link-item" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${body}
-              <i class="fa-solid fa-arrow-up-right-from-square link-go" aria-hidden="true"></i>
-            </a>
-          </li>`;
-        }
-        return `
-          <li class="reveal" ${delay(i + 1)}>
-            <button type="button" class="link-item" data-copy="${esc(l.handle)}" aria-label="${esc(l.label)} のIDをコピー">${body}
-              <i class="fa-regular fa-copy link-go" aria-hidden="true"></i>
-            </button>
-          </li>`;
-      })
-      .join('');
-    return `
-    <section class="link-page">
-      <div class="profile-head reveal" ${delay(0)}>
-        ${avatar('avatar-sm')}
-        <h1>${esc(profile.name)}</h1>
-        <p class="subtitle">${esc(profile.subtitle)}</p>
-      </div>
-      <ul class="link-list">${items}
-      </ul>
-    </section>`;
   },
 };
 

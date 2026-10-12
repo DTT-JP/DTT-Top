@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>My Devices - DTTJP.com</title>
-  <meta name="description" content="高校生 DTT のポートフォリオ。作ったサービス、使っているデバイス、SNS をまとめています。">
+  <meta name="description" content="高校生 DTT のポートフォリオ。制作物・使える技術・使っているデバイス・SNS をまとめています。">
   <meta name="theme-color" content="#080c13">
   <link rel="icon" type="image/png" href="favicon.png">
   <script>
@@ -40,10 +40,8 @@
       <a class="brand" href="index.html">DTTJP<span>.com</span></a>
       <nav class="nav" aria-label="メインメニュー">
         <a class="nav-link" href="index.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About</span></a>
-        <a class="nav-link" href="projects.html"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i><span>Projects</span></a>
-        <a class="nav-link" href="services.html"><i class="fa-solid fa-cubes" aria-hidden="true"></i><span>Services</span></a>
+        <a class="nav-link" href="works.html"><i class="fa-solid fa-cubes" aria-hidden="true"></i><span>Works</span></a>
         <a class="nav-link" href="devices.html" aria-current="page"><i class="fa-solid fa-microchip" aria-hidden="true"></i><span>Devices</span></a>
-        <a class="nav-link" href="links.html"><i class="fa-solid fa-link" aria-hidden="true"></i><span>Links</span></a>
       </nav>
       <button type="button" id="theme-toggle" class="icon-btn" aria-label="ライト / ダークを切り替え">
         <i class="fa-solid fa-moon icon-for-dark" aria-hidden="true"></i>
@@ -56,22 +54,34 @@
     <header class="page-head reveal" style="--i:0">
       <p class="eyebrow">Devices</p>
       <h1>My Devices</h1>
-      <p class="lead">普段使っている PC、サーバー、ガジェットの一覧です。</p>
+      <p class="lead">普段使っている PC、サーバー、ガジェットと、その用途です。</p>
     </header>
     <div class="device-list">
       <section class="device-cat reveal" style="--i:1">
         <h2 class="cat-title"><span class="icon-tile icon-tile-sm"><i class="fa-solid fa-desktop" aria-hidden="true"></i></span>PCs &amp; Laptops<span class="count">3</span></h2>
         <div class="card-grid">
           <article class="card device">
-            <h3>メインPC</h3>
+            <div class="device-head">
+              <h3>メインPC</h3>
+              <p class="device-role">PC VR 専用機</p>
+              <p class="device-desc">ほぼ PC VR 専用で使っています。</p>
+            </div>
             <dl class="specs"><div><dt>CPU</dt><dd>Intel Core i7-4790</dd></div><div><dt>RAM</dt><dd>16GB (DDR3-1600 8GBx2)</dd></div><div><dt>GPU</dt><dd>Intel HD Graphics 4600 / NVIDIA Quadro M2000</dd></div><div><dt>Storage</dt><dd>SATA SSD 500GB</dd></div><div><dt>OS</dt><dd>Windows 10 Pro 22H2</dd></div></dl>
           </article>
           <article class="card device">
-            <h3>サブPC</h3>
+            <div class="device-head">
+              <h3>サブPC</h3>
+              <p class="device-role">メディア視聴用</p>
+              <p class="device-desc">BD・TV の視聴やサラウンド視聴など、メディアを楽しむための PC です。</p>
+            </div>
             <dl class="specs"><div><dt>CPU</dt><dd>Intel Core i7-5500U</dd></div><div><dt>RAM</dt><dd>8GB (DDR3-1600 4GBx2)</dd></div><div><dt>GPU</dt><dd>Intel HD Graphics 5500</dd></div><div><dt>Storage</dt><dd>SATA SSD 256GB</dd></div><div><dt>OS</dt><dd>Windows 11 Home 26H2</dd></div></dl>
           </article>
           <article class="card device">
-            <h3>ノートPC</h3>
+            <div class="device-head">
+              <h3>ノートPC</h3>
+              <p class="device-role">事実上のメイン機</p>
+              <p class="device-desc">開発をはじめ、ほぼすべての作業をこの PC で行っています。</p>
+            </div>
             <dl class="specs"><div><dt>CPU</dt><dd>Intel Core i5-1135G7</dd></div><div><dt>RAM</dt><dd>24GB (DDR4-3200 16GB+8GB)</dd></div><div><dt>GPU</dt><dd>Intel Iris Xe Graphics</dd></div><div><dt>Storage</dt><dd>NVMe SSD 256GB</dd></div><div><dt>OS</dt><dd>Windows 11 Pro 26H2</dd></div></dl>
           </article>
         </div>
@@ -80,23 +90,43 @@
         <h2 class="cat-title"><span class="icon-tile icon-tile-sm"><i class="fa-solid fa-server" aria-hidden="true"></i></span>Servers<span class="count">5</span></h2>
         <div class="card-grid">
           <article class="card device">
-            <h3>Iroha(自宅鯖)</h3>
+            <div class="device-head">
+              <h3>Iroha(自宅鯖)</h3>
+              <p class="device-role">コンテナ用サーバー</p>
+              <p class="device-desc">Cockpit + Podman で運用している自宅サーバーです。</p>
+            </div>
             <dl class="specs"><div><dt>CPU</dt><dd>Intel Core i7-2670QM</dd></div><div><dt>RAM</dt><dd>8GB (DDR3-1333 4GBx2)</dd></div><div><dt>GPU</dt><dd>Intel HD Graphics 3000</dd></div><div><dt>Storage</dt><dd>SATA HDD 320GB</dd></div><div><dt>OS</dt><dd>Debian 13</dd></div></dl>
           </article>
           <article class="card device">
-            <h3>Kaguya(自宅鯖)</h3>
+            <div class="device-head">
+              <h3>Kaguya(自宅鯖)</h3>
+              <p class="device-role">自宅サーバー（入れ替え予定）</p>
+              <p class="device-desc">現在は Proxmox VE で動いています。Cockpit + Podman の構成へ入れ替える予定です。</p>
+            </div>
             <dl class="specs"><div><dt>CPU</dt><dd>Intel Core i3-4160</dd></div><div><dt>RAM</dt><dd>12GB (DDR3-1600 8GB+4GB)</dd></div><div><dt>GPU</dt><dd>Intel HD Graphics 4400</dd></div><div><dt>Storage</dt><dd>SATA HDD 500GB</dd></div><div><dt>Data Storage</dt><dd>SATA HDD 500GB</dd></div><div><dt>OS</dt><dd>Proxmox VE 9</dd></div></dl>
           </article>
           <article class="card device">
-            <h3>oci-arm01(VPS)</h3>
+            <div class="device-head">
+              <h3>oci-arm01(VPS)</h3>
+              <p class="device-role">高負荷アプリ用・公開</p>
+              <p class="device-desc">Minecraft サーバーなど、リソースを多く使うものを動かしています。主に外部公開用です。</p>
+            </div>
             <dl class="specs"><div><dt>CPU</dt><dd>Oracle Ampere A1 4OCPU</dd></div><div><dt>RAM</dt><dd>24GB</dd></div><div><dt>Storage</dt><dd>BlockStorage 100GB</dd></div><div><dt>OS</dt><dd>Ubuntu 24.04 LTS</dd></div></dl>
           </article>
           <article class="card device">
-            <h3>oci-amd01(VPS)</h3>
+            <div class="device-head">
+              <h3>oci-amd01(VPS)</h3>
+              <p class="device-role">軽量アプリ用・公開</p>
+              <p class="device-desc">あまりリソースを使わないアプリを動かす、外部公開用のサーバーです。</p>
+            </div>
             <dl class="specs"><div><dt>CPU</dt><dd>Oracle E2.1.Micro 1OCPU</dd></div><div><dt>RAM</dt><dd>1GB</dd></div><div><dt>Storage</dt><dd>BlockStorage 50GB</dd></div><div><dt>OS</dt><dd>Ubuntu 24.04 LTS</dd></div></dl>
           </article>
           <article class="card device">
-            <h3>oci-amd02(VPS)</h3>
+            <div class="device-head">
+              <h3>oci-amd02(VPS)</h3>
+              <p class="device-role">公開用 その2</p>
+              <p class="device-desc">外部公開用のサーバーその 2 です。</p>
+            </div>
             <dl class="specs"><div><dt>CPU</dt><dd>Oracle E2.1.Micro 1OCPU</dd></div><div><dt>RAM</dt><dd>1GB</dd></div><div><dt>Storage</dt><dd>BlockStorage 50GB</dd></div><div><dt>OS</dt><dd>Ubuntu 24.04 LTS</dd></div></dl>
           </article>
         </div>
@@ -104,37 +134,61 @@
       <section class="device-cat reveal" style="--i:3">
         <h2 class="cat-title"><span class="icon-tile icon-tile-sm"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i></span>Mobile &amp; Gadgets<span class="count">8</span></h2>
         <div class="card-grid card-grid-sm">
-          <article class="card device">
-            <h3>スマホ</h3>
-            <p class="device-desc">AQUOS wish 3 (通称: Gomios)</p>
+          <article class="card device device-plain">
+            <div class="device-head">
+              <h3>スマホ</h3>
+              <p class="device-desc">AQUOS wish 3 (通称: Gomios)</p>
+            </div>
+            
           </article>
-          <article class="card device">
-            <h3>iPad</h3>
-            <p class="device-desc">iPad A16 Wi-Fi + Cellularモデル 128GB</p>
+          <article class="card device device-plain">
+            <div class="device-head">
+              <h3>iPad</h3>
+              <p class="device-desc">iPad A16 Wi-Fi + Cellularモデル 128GB</p>
+            </div>
+            
           </article>
-          <article class="card device">
-            <h3>スタイラスペン</h3>
-            <p class="device-desc">iPadタッチペン（非純正）</p>
+          <article class="card device device-plain">
+            <div class="device-head">
+              <h3>スタイラスペン</h3>
+              <p class="device-desc">iPadタッチペン（非純正）</p>
+            </div>
+            
           </article>
-          <article class="card device">
-            <h3>NewNintendo2DSLL</h3>
-            <p class="device-desc">携帯ゲーム機</p>
+          <article class="card device device-plain">
+            <div class="device-head">
+              <h3>NewNintendo2DSLL</h3>
+              <p class="device-desc">携帯ゲーム機</p>
+            </div>
+            
           </article>
-          <article class="card device">
-            <h3>チャレンジパッド3</h3>
-            <p class="device-desc">学習用タブレット (Android化・GAS導入済み) 最近壊れたかも</p>
+          <article class="card device device-plain">
+            <div class="device-head">
+              <h3>チャレンジパッド3</h3>
+              <p class="device-desc">学習用タブレット (Android化・GAS導入済み) 最近壊れたかも</p>
+            </div>
+            
           </article>
-          <article class="card device">
-            <h3>チャレンジパッドNext</h3>
-            <p class="device-desc">学習用タブレット (ペン付き・Android化・GAS導入済み) 目覚まし時計化してる</p>
+          <article class="card device device-plain">
+            <div class="device-head">
+              <h3>チャレンジパッドNext</h3>
+              <p class="device-desc">学習用タブレット (ペン付き・Android化・GAS導入済み) 目覚まし時計化してる</p>
+            </div>
+            
           </article>
-          <article class="card device">
-            <h3>モバイルバッテリー</h3>
-            <p class="device-desc">UGREEN 45w 20000mAh</p>
+          <article class="card device device-plain">
+            <div class="device-head">
+              <h3>モバイルバッテリー</h3>
+              <p class="device-desc">UGREEN 45w 20000mAh</p>
+            </div>
+            
           </article>
-          <article class="card device">
-            <h3>VR HMD</h3>
-            <p class="device-desc">Oculus Rift S</p>
+          <article class="card device device-plain">
+            <div class="device-head">
+              <h3>VR HMD</h3>
+              <p class="device-desc">Oculus Rift S</p>
+            </div>
+            
           </article>
         </div>
       </section>
@@ -148,7 +202,7 @@
         <span>Display Mode</span>
         <div class="segmented" role="group" aria-label="表示モード">
           <span class="seg is-active" aria-current="true">Modern <small>2014-2026+</small></span>
-          <a class="seg" href="s/devices.html">Retro <small>IE4+</small></a>
+          <a class="seg" href="s/devices.html">Retro <small>2000年前後</small></a>
           <a class="seg" href="ss/devices.html">Vintage <small>Pre-IE4</small></a>
         </div>
       </div>

@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import yaml from 'js-yaml';
-import { GENERATED_NOTE } from './lib.mjs';
+import { GENERATED_NOTE, redirectPage } from './lib.mjs';
 import * as modern from './templates/modern.mjs';
 import * as retro from './templates/retro.mjs';
 import * as vintage from './templates/vintage.mjs';
@@ -39,14 +39,14 @@ function need(cond, message) {
 const site = loadYaml('site.yml');
 const data = {
   ...site,
-  ...loadYaml('projects.yml'),
-  ...loadYaml('services.yml'),
+  ...loadYaml('works.yml'),
+  ...loadYaml('skills.yml'),
   ...loadYaml('devices.yml'),
   ...loadYaml('links.yml'),
 };
 
 // ---------- 最低限のチェック ----------
-for (const key of ['site', 'profile', 'nav', 'modes', 'projects', 'services', 'categories', 'links']) {
+for (const key of ['site', 'profile', 'sections', 'nav', 'modes', 'works', 'skills', 'categories', 'links']) {
   need(data[key] !== undefined, `設定ファイルに「${key}:」がありません。`);
 }
 for (const m of data.modes) {
@@ -60,13 +60,20 @@ for (const n of data.nav) {
 }
 
 // ---------- 生成 ----------
-const out = new Map(); // 相対パス → 文字列
+const out = new Map(); // 相対パス → 文字列 または Buffer
 
 for (const mode of data.modes) {
   const tpl = TEMPLATES[mode.id];
   for (const page of data.nav) {
     const ctx = { ...data, mode, page };
     out.set(join(mode.dir, page.file), tpl.layout(ctx, tpl.pages[page.id](ctx)));
+  }
+}
+
+// 旧URLからの転送ページ（全モード）
+for (const mode of data.modes) {
+  for (const [from, to] of Object.entries(data.redirects ?? {})) {
+    out.set(join(mode.dir, from), redirectPage(to));
   }
 }
 
@@ -77,13 +84,18 @@ out.set('style.css', banner(`${GENERATED_NOTE} 元: src/assets/modern/style.css`
 out.set('main.js', banner(`${GENERATED_NOTE} 元: src/assets/modern/main.js`) + asset('modern/main.js'));
 const retroDir = data.modes.find((m) => m.id === 'retro')?.dir ?? 's';
 out.set(join(retroDir, 'style.css'), banner(`${GENERATED_NOTE} 元: src/assets/retro/style.css`) + asset('retro/style.css'));
+// レトロ版の画像（GIF）はそのままコピー
+for (const img of ['bg.gif', 'rainbow.gif']) {
+  out.set(join(retroDir, img), readFileSync(join(ROOT, 'src/assets/retro', img)));
+}
 
 // ---------- 書き出し / 検査 ----------
 let changed = 0;
 for (const [rel, content] of out) {
   const dest = join(ROOT, rel);
-  const current = existsSync(dest) ? readFileSync(dest, 'utf8') : null;
-  if (current === content) continue;
+  const isText = typeof content === 'string';
+  const current = existsSync(dest) ? readFileSync(dest, isText ? 'utf8' : undefined) : null;
+  if (current !== null && (isText ? current === content : current.equals(content))) continue;
   changed++;
   if (CHECK_ONLY) {
     console.log(`  out of date: ${rel}`);

@@ -61,5 +61,34 @@ export const specLine = (specs) =>
     .map(([k, v]) => `${k}: ${v}`)
     .join(', ');
 
+/** 「2026-10-12」→「2026年10月12日」 */
+export function dateJa(text = '') {
+  const m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(String(text));
+  return m ? `${m[1]}年${Number(m[2])}月${Number(m[3])}日` : String(text);
+}
+
+/** 作品の「代表URL」（primary のリンク、無ければ最初のリンク） */
+export function primaryUrl(work) {
+  const links = work.links ?? [];
+  return (links.find((l) => l.kind === 'primary') ?? links[0])?.url;
+}
+
+/** 旧URL用の転送ページ（どのモードでも使える、素のHTML） */
+export function redirectPage(target, label = 'こちら') {
+  const t = esc(target);
+  return `<!-- ${GENERATED_NOTE} -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="refresh" content="0; url=${t}">
+<title>ページが移動しました</title>
+</head>
+<body>
+<p>ページが移動しました。自動で切り替わらない場合は <a href="${t}">${esc(label)}</a> を開いてください。</p>
+</body>
+</html>
+`;
+}
+
 export const GENERATED_NOTE =
   'このファイルは自動生成されています。直接編集せず content/ か src/ を編集してください。';

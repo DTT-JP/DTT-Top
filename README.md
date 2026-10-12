@@ -1,30 +1,33 @@
 # DTTJP.com ポートフォリオサイト (dtt-top)
 
 高校生 DTT のポートフォリオサイトです。
-サービス・デバイス・SNS などの内容を `content/*.yml`（設定ファイル）に書くだけで、**3つの表示モード × 5ページ = 15枚の HTML** を自動生成します。
+制作物・デバイス・SNS などの内容を `content/*.yml`（設定ファイル）に書くだけで、**3つの表示モード × 3ページ = 9枚の HTML** を自動生成します。
 
 | モード | 出力先 | 見た目 |
 | --- | --- | --- |
 | 通常版 (Modern) | `/` | ダーク/ライト両対応のモダンなデザイン。スマホでは下部タブバー |
-| レトロ版 (IE4+) | `/s/` | Windows 98 + Internet Explorer 4 風。table レイアウト + CSS1 のみ |
+| レトロ版 | `/s/` | 2000 年前後の個人ホームページ風。table レイアウト + 画像（GIF）+ 最小限の CSS |
 | ヴィンテージ版 (Pre-IE4) | `/ss/` | CSS なし・素の HTML のみ（Netscape 2.0 世代向け） |
 
-## 1. 何が変わったか（従来との違い）
+## 1. 何が変わったか
 
 - これまでは 15 枚の HTML を手書きしていたため、サービスを 1 つ増やすたびに 3 モード分を直す必要がありました。今は **設定ファイル 1 か所を直すだけ** です。
-- 通常版: M3 風の寄せ集めをやめ、統一したデザイントークン（色・角丸・影）で作り直しました。サービスごとのアイコン、スマホ用の下部ナビ、キーボード操作・動きを減らす設定への対応を追加しています。
-- レトロ版: 紺背景に青文字で読みにくかった配色をやめ、「白背景に黒文字」の Windows 98 風ウィンドウにしました。
-- 出力される HTML のファイル名・URL は従来と同じです（`index.html`, `s/devices.html` など）。
+- ページ構成を整理しました: **About（自己紹介 + 使える技術 + SNS リンク）／ Works（制作物）／ Devices**。旧 `projects.html` `services.html` `links.html` は、新しいページへ自動で飛ぶ転送ページとして残してあります（古いリンクが 404 にならないため）。
+- 自己紹介文は 3 モード共通です（`content/site.yml` の `profile`）。モードごとに書き分けるのは「そのモードならではの一言」（`modes[].message`）だけです。
+- 制作物ごとに「使用技術」と「背景・仕組み」を持たせました。通常版では技術がチップで並び、背景は折りたたみ表示。レトロ版・ヴィンテージ版では本文にそのまま出ます。
+- デバイスごとに「用途」を持たせました。
+- 通常版: M3 風の寄せ集めをやめ、統一したデザイントークン（色・角丸・影）で作り直しました。スマホでは下部タブバーになります。
+- レトロ版: 「IE の窓」の再現をやめ、**2000 年前後の個人ホームページ**（背景タイル・左メニュー・虹色の罫線・流れる文字・ページ内リンク）の再現にしました。
 
 ## 2. ファイル構成
 
 ```
 dtt-top/
 ├─ content/                 ← ★普段編集するのはここだけ
-│  ├─ site.yml              サイト名・ナビ・各モードの文言
-│  ├─ projects.yml          プロジェクト一覧
-│  ├─ services.yml          Web サービス一覧
-│  ├─ devices.yml           デバイス一覧
+│  ├─ site.yml              サイト名・共通の自己紹介・ナビ・各モードの一言・旧URL転送
+│  ├─ skills.yml            使える技術スタック
+│  ├─ works.yml             制作物（作ったもの全部）
+│  ├─ devices.yml           デバイス一覧（用途つき）
 │  └─ links.yml             SNS・アカウント一覧
 ├─ src/                     ← 見た目や仕組みを変えたい時に編集
 │  ├─ build.mjs             生成スクリプト本体
@@ -32,15 +35,16 @@ dtt-top/
 │  ├─ templates/            モードごとの HTML の型 (modern / retro / vintage)
 │  └─ assets/
 │     ├─ modern/style.css, main.js   通常版の CSS / JS の元
-│     └─ retro/style.css             レトロ版の CSS の元
+│     └─ retro/style.css, bg.gif, rainbow.gif   レトロ版の CSS と画像の元
 ├─ package.json / package-lock.json  依存パッケージ (js-yaml のみ)
 ├─ favicon.png                       アイコン兼アバター画像
 │
 │  ── ここから下は自動生成（直接編集しない）──
-├─ index.html projects.html services.html devices.html links.html
+├─ index.html works.html devices.html
+├─ projects.html services.html links.html   （旧URL → 新ページへの転送）
 ├─ style.css main.js
-├─ s/    …レトロ版 (5ページ + style.css)
-└─ ss/   …ヴィンテージ版 (5ページ)
+├─ s/    …レトロ版（3ページ + 転送 + style.css + 画像）
+└─ ss/   …ヴィンテージ版（3ページ + 転送）
 ```
 
 > 自動生成されるファイルを直接編集しても、次のビルドで上書きされます。必ず `content/` か `src/` を編集してください。
@@ -79,31 +83,47 @@ Node.js が入っていない場合は、公式サイト <https://nodejs.org/> �
   例: `desc: "AQUOS wish 3 (通称: Gomios)"`
 - 間違えるとビルドが「何行目付近が悪いか」を表示して止まります。
 
-### サービスを 1 つ追加する（`content/services.yml`）
+### 制作物を 1 つ追加する（`content/works.yml`）
 
-`services:` の下に、同じ形で追記します。
+`works:` の下に、同じ形で追記します。
 
 ```yaml
-  - title: 新サービス名
+  - title: 新しい作品名
     icon: fa-solid fa-rocket
     desc: 一言の説明文
-    url: https://example.dttjp.com/
+    tech: [HTML, CSS, JavaScript]
+    background: 作りや背景の説明（任意）
+    links:
+      - label: Open
+        url: https://example.dttjp.com/
+        kind: primary
 ```
 
 - `icon` は Font Awesome のクラス名です。<https://fontawesome.com/icons> で Free のアイコンを探し、表示されるクラス名（例: `fa-solid fa-rocket`）を書きます。無料で使えないアイコン（Pro 限定）は表示されません。
+- `tech` と `background` は省略できます。
+
+### 技術を追加する（`content/skills.yml`）
+
+該当カテゴリの `items:` の `[ ]` の中に、`, ` 区切りで追記します。
+
+### デバイスの用途を変える（`content/devices.yml`）
+
+各デバイスの `role`（一言）と `desc`（説明）を書き換えます。
 
 ### 各ファイルの項目
 
 | ファイル | 主な項目 | 説明 |
 | --- | --- | --- |
-| `site.yml` | `site` | サイト名・ロゴ・説明文・年・favicon |
-| | `profile` | 名前・肩書き・トップの一言 |
-| | `nav` | ページ一覧（名前・見出し・アイコン・説明） |
-| | `modes` | 各モードの出力先と、レトロ/ヴィンテージの自己紹介文 |
-| `projects.yml` | `projects[].links[]` | ボタン（`kind: primary` は塗り、`secondary` は枠線） |
-| | `coming_soon` | 「準備中」カード。不要なら丸ごと削除 |
-| `services.yml` | `services[]` | `title` `icon` `desc` `url` |
-| `devices.yml` | `categories[]` | `kind: specs` は項目名: 値の表、`kind: simple` は名前 + 説明 |
+| `site.yml` | `site` | サイト名・ロゴ・説明文・年・最終更新日（レトロ版に表示）・favicon |
+| | `profile` | 名前・肩書き・一言（`intro`）・自己紹介の段落（`about`）。**3 モード共通** |
+| | `sections` | About ページ内の見出し（About / Tech Stack / Links） |
+| | `nav` | ページ一覧（名前・見出し・アイコン） |
+| | `redirects` | 旧ファイル名 → 転送先 |
+| | `modes` | 各モードの出力先と、そのモードならではの一言（`message`） |
+| `skills.yml` | `skills[]` | カテゴリ（`title` `en` `icon`）と `items` |
+| `works.yml` | `works[]` | `title` `icon` `desc` `tech` `background` `links[]` |
+| | `coming_soon` | 「準備中」カード（不要なら削除） |
+| `devices.yml` | `categories[]` | `kind: specs` は用途 + スペック表、`kind: simple` は名前 + 説明 |
 | `links.yml` | `links[]` | `url` を省略すると ID のみ表示（通常版ではクリックでコピー） |
 
 `links.yml` の `icon` には Font Awesome のクラス名のほか、`svg:x` / `svg:qiita`（内蔵 SVG）、`text:VR`（文字アイコン）が使えます。
@@ -124,21 +144,23 @@ npm run check   # 書き出さずに「生成物が最新か」だけ確認
 
 ### 6-1. 今回の変更を最初に反映する
 
-zip を展開したフォルダの中身を、自分の `dtt-top` フォルダ（`git clone` したもの）に **上書きコピー** します。ファイル名は従来と同じなので、削除するファイルはありません。
+zip を展開したフォルダの中身を、自分の `dtt-top` フォルダ（`git clone` したもの）に **上書きコピー** します。旧 `projects.html` `services.html` `links.html` は転送ページとして上書きされるため、HTML 側で削除するファイルはありません。
+
+> 前回の zip（`content/projects.yml` と `content/services.yml` が入っていたもの）を適用済みの場合だけ、この 2 ファイルを削除してください（残っていても動作には影響しませんが、使われません）。
 
 ```bash
 cd dtt-top
 npm install
 npm run build
 git add -A
-git commit -m "サイトを設定ファイルからの生成方式に変更し、デザインを刷新"
+git commit -m "サイトを設定ファイルからの生成方式に変更し、構成とデザインを刷新"
 git push origin main
 ```
 
 ### 6-2. 普段の更新手順
 
 ```bash
-# 1. content/ のファイルを編集（例: content/services.yml）
+# 1. content/ のファイルを編集（例: content/works.yml）
 # 2. ビルド
 npm run build
 # 3. 生成物の最新確認（任意。"OK" と出ればよい）
@@ -170,4 +192,4 @@ git push origin main
 ## 9. 動作の前提
 
 - 通常版は新しいブラウザ向けです（`backdrop-filter`・CSS 変数などを使用）。古い環境向けには `/s/` と `/ss/` を用意しています。
-- レトロ版の `<marquee>` と一部の装飾は、現行ブラウザでは非推奨機能・おまけ表示です（見た目だけの演出で、読む妨げにはなりません）。
+- レトロ版の `<marquee>`（流れる文字）や IE 専用の色付きスクロールバーは、現行ブラウザでは非推奨・無視される機能です。見た目だけの演出で、読む妨げにはなりません。

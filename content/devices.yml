@@ -1,6 +1,7 @@
 # ============================================================
 #  デバイス一覧
 #  kind: specs … スペック表示（specs: に「項目名: 値」を並べる。項目は自由に増減OK）
+#                 role = 一言の用途 / desc = 用途の説明（どちらも省略可）
 #  kind: simple … 名前 + 一言説明（desc:）
 #  レトロ版・ヴィンテージ版にも自動で反映されます。
 # ============================================================
@@ -13,6 +14,8 @@ categories:
     kind: specs
     items:
       - name: メインPC
+        role: PC VR 専用機
+        desc: ほぼ PC VR 専用で使っています。
         specs:
           CPU: Intel Core i7-4790
           RAM: 16GB (DDR3-1600 8GBx2)
@@ -20,6 +23,8 @@ categories:
           Storage: SATA SSD 500GB
           OS: Windows 10 Pro 22H2
       - name: サブPC
+        role: メディア視聴用
+        desc: BD・TV の視聴やサラウンド視聴など、メディアを楽しむための PC です。
         specs:
           CPU: Intel Core i7-5500U
           RAM: 8GB (DDR3-1600 4GBx2)
@@ -27,6 +32,8 @@ categories:
           Storage: SATA SSD 256GB
           OS: Windows 11 Home 26H2
       - name: ノートPC
+        role: 事実上のメイン機
+        desc: 開発をはじめ、ほぼすべての作業をこの PC で行っています。
         specs:
           CPU: Intel Core i5-1135G7
           RAM: 24GB (DDR4-3200 16GB+8GB)
@@ -41,6 +48,8 @@ categories:
     kind: specs
     items:
       - name: Iroha(自宅鯖)
+        role: コンテナ用サーバー
+        desc: Cockpit + Podman で運用している自宅サーバーです。
         specs:
           CPU: Intel Core i7-2670QM
           RAM: 8GB (DDR3-1333 4GBx2)
@@ -48,6 +57,8 @@ categories:
           Storage: SATA HDD 320GB
           OS: Debian 13
       - name: Kaguya(自宅鯖)
+        role: 自宅サーバー（入れ替え予定）
+        desc: 現在は Proxmox VE で動いています。Cockpit + Podman の構成へ入れ替える予定です。
         specs:
           CPU: Intel Core i3-4160
           RAM: 12GB (DDR3-1600 8GB+4GB)
@@ -56,18 +67,24 @@ categories:
           Data Storage: SATA HDD 500GB
           OS: Proxmox VE 9
       - name: oci-arm01(VPS)
+        role: 高負荷アプリ用・公開
+        desc: Minecraft サーバーなど、リソースを多く使うものを動かしています。主に外部公開用です。
         specs:
           CPU: Oracle Ampere A1 4OCPU
           RAM: 24GB
           Storage: BlockStorage 100GB
           OS: Ubuntu 24.04 LTS
       - name: oci-amd01(VPS)
+        role: 軽量アプリ用・公開
+        desc: あまりリソースを使わないアプリを動かす、外部公開用のサーバーです。
         specs:
           CPU: Oracle E2.1.Micro 1OCPU
           RAM: 1GB
           Storage: BlockStorage 50GB
           OS: Ubuntu 24.04 LTS
       - name: oci-amd02(VPS)
+        role: 公開用 その2
+        desc: 外部公開用のサーバーその 2 です。
         specs:
           CPU: Oracle E2.1.Micro 1OCPU
           RAM: 1GB

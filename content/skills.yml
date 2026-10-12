@@ -1,0 +1,29 @@
+# ============================================================
+#  使える技術スタック（About ページに表示）
+#  カテゴリごとに items を並べるだけ。全モードに反映されます。
+# ============================================================
+
+skills:
+  - id: lang
+    title: 言語
+    en: Languages
+    icon: fa-solid fa-code
+    items: [Python, JavaScript, Node.js, PHP, HTML, CSS, Bash / sh, Batch, PowerShell, VBScript, Arduino]
+
+  - id: infra
+    title: インフラ
+    en: Infrastructure
+    icon: fa-solid fa-server
+    items: [Linux (Debian系), Linux (Arch系), Proxmox VE, Oracle Cloud, Cloudflare, Cockpit]
+
+  - id: tools
+    title: 開発・運用ツール
+    en: Dev & Ops Tools
+    icon: fa-solid fa-screwdriver-wrench
+    items: [Git, GitHub Actions, Podman, Docker, Docker Compose, pm2, OpenCV]
+
+  - id: apps
+    title: アプリ
+    en: Applications
+    icon: fa-solid fa-window-restore
+    items: [VS Code, Fusion 360, Unity, Arduino IDE, OBS, YMM4Lite, LM Studio, Ollama]
