@@ -43,10 +43,13 @@ const data = {
   ...loadYaml('skills.yml'),
   ...loadYaml('devices.yml'),
   ...loadYaml('links.yml'),
+  ...loadYaml('partners.yml'),
 };
+data.partners = data.partners ?? []; // 空の一覧（null）でも動くように
+
 
 // ---------- 最低限のチェック ----------
-for (const key of ['site', 'profile', 'sections', 'nav', 'modes', 'works', 'skills', 'categories', 'links']) {
+for (const key of ['site', 'profile', 'sections', 'nav', 'modes', 'works', 'skills', 'categories', 'links', 'partners']) {
   need(data[key] !== undefined, `設定ファイルに「${key}:」がありません。`);
 }
 for (const m of data.modes) {
@@ -58,6 +61,15 @@ for (const n of data.nav) {
   }
   need(typeof TEMPLATES.modern.pages[n.id] === 'function', `nav の id「${n.id}」に対応するページ定義がありません。`);
 }
+
+// 相互リンクは外部サイトなので、URL は http(s) のみ許可（javascript: などの混入を防ぐ）
+need(Array.isArray(data.partners), 'content/partners.yml の「partners:」は一覧（- name: ...）で書いてください。');
+data.partners.forEach((p, i) => {
+  const label = `partners の ${i + 1} 件目${p?.name ? `（${p.name}）` : ''}`;
+  need(p && p.name, `${label} に「name」がありません。`);
+  need(p.url, `${label} に「url」がありません。`);
+  need(/^https?:\/\//i.test(String(p.url)), `${label} の url は https:// か http:// で始めてください（現在: ${p.url}）。`);
+});
 
 // ---------- 生成 ----------
 const out = new Map(); // 相対パス → 文字列 または Buffer

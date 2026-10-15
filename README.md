@@ -1,7 +1,7 @@
 # DTTJP.com ポートフォリオサイト (dtt-top)
 
 高校生 DTT のポートフォリオサイトです。
-制作物・デバイス・SNS などの内容を `content/*.yml`（設定ファイル）に書くだけで、**3つの表示モード × 3ページ = 9枚の HTML** を自動生成します。
+制作物・デバイス・SNS などの内容を `content/*.yml`（設定ファイル）に書くだけで、**3つの表示モード × 4ページ = 12枚の HTML** を自動生成します。
 
 | モード | 出力先 | 見た目 |
 | --- | --- | --- |
@@ -12,7 +12,7 @@
 ## 1. 何が変わったか
 
 - これまでは 15 枚の HTML を手書きしていたため、サービスを 1 つ増やすたびに 3 モード分を直す必要がありました。今は **設定ファイル 1 か所を直すだけ** です。
-- ページ構成を整理しました: **About（自己紹介 + 使える技術 + SNS リンク）／ Works（制作物）／ Devices**。旧 `projects.html` `services.html` `links.html` は、新しいページへ自動で飛ぶ転送ページとして残してあります（古いリンクが 404 にならないため）。
+- ページ構成を整理しました: **About（自己紹介 + 使える技術 + SNS リンク）／ Works（制作物）／ Devices／ Partners（相互リンク）**。旧 `projects.html` `services.html` `links.html` は、新しいページへ自動で飛ぶ転送ページとして残してあります（古いリンクが 404 にならないため）。
 - 自己紹介文は 3 モード共通です（`content/site.yml` の `profile`）。モードごとに書き分けるのは「そのモードならではの一言」（`modes[].message`）だけです。
 - 制作物ごとに「使用技術」と「背景・仕組み」を持たせました。通常版では技術がチップで並び、背景は折りたたみ表示。レトロ版・ヴィンテージ版では本文にそのまま出ます。
 - デバイスごとに「用途」を持たせました。
@@ -28,7 +28,8 @@ dtt-top/
 │  ├─ skills.yml            使える技術スタック
 │  ├─ works.yml             制作物（作ったもの全部）
 │  ├─ devices.yml           デバイス一覧（用途つき）
-│  └─ links.yml             SNS・アカウント一覧
+│  ├─ links.yml             SNS・アカウント一覧
+│  └─ partners.yml          相互リンク（外部サイト）の一覧
 ├─ src/                     ← 見た目や仕組みを変えたい時に編集
 │  ├─ build.mjs             生成スクリプト本体
 │  ├─ lib.mjs               共通の小さな関数
@@ -40,11 +41,11 @@ dtt-top/
 ├─ favicon.png                       アイコン兼アバター画像
 │
 │  ── ここから下は自動生成（直接編集しない）──
-├─ index.html works.html devices.html
+├─ index.html works.html devices.html partners.html
 ├─ projects.html services.html links.html   （旧URL → 新ページへの転送）
 ├─ style.css main.js
-├─ s/    …レトロ版（3ページ + 転送 + style.css + 画像）
-└─ ss/   …ヴィンテージ版（3ページ + 転送）
+├─ s/    …レトロ版（4ページ + 転送 + style.css + 画像）
+└─ ss/   …ヴィンテージ版（4ページ + 転送）
 ```
 
 > 自動生成されるファイルを直接編集しても、次のビルドで上書きされます。必ず `content/` か `src/` を編集してください。
@@ -110,6 +111,25 @@ Node.js が入っていない場合は、公式サイト <https://nodejs.org/> �
 
 各デバイスの `role`（一言）と `desc`（説明）を書き換えます。
 
+### 相互リンクを 1 つ追加する（`content/partners.yml`）
+
+`partners:` の下に、同じ形で追記します（初期状態は `partners: []`＝0 件なので、最初の 1 件を書くときは `[]` を消して、次のように書き換えます）。
+
+```yaml
+partners:
+  - name: 相手のサイト名
+    url: https://example.com/
+    desc: 一言の説明（省略できます）
+    icon: fa-solid fa-globe   # 省略すると fa-solid fa-link
+```
+
+- `name` と `url` は必須です。`url` は `https://` か `http://` で始めてください（違うとビルドが止まります）。
+- 相互リンク先は外部サイトなので、**全モードで新しいタブで開きます**（通常版は `rel="noopener noreferrer"` 付き）。
+- 一覧は書いた順に表示されます。
+- `partners_note` に文章を書くと一覧の下に表示されます（相互リンクの募集案内など。空なら非表示）。
+- `partners_empty` は、登録が 0 件のときに表示する文章です。
+- メニューの名前・ページ見出し・説明文は `content/site.yml` の `nav`（`id: partners`）で変えられます。
+
 ### 各ファイルの項目
 
 | ファイル | 主な項目 | 説明 |
@@ -124,6 +144,8 @@ Node.js が入っていない場合は、公式サイト <https://nodejs.org/> �
 | `works.yml` | `works[]` | `title` `icon` `desc` `tech` `background` `links[]` |
 | | `coming_soon` | 「準備中」カード（不要なら削除） |
 | `devices.yml` | `categories[]` | `kind: specs` は用途 + スペック表、`kind: simple` は名前 + 説明 |
+| `partners.yml` | `partners[]` | 相互リンク先（`name` `url` `desc` `icon`） |
+| | `partners_note` / `partners_empty` | 一覧下の案内文 / 0 件のときの文章 |
 | `links.yml` | `links[]` | `url` を省略すると ID のみ表示（通常版ではクリックでコピー） |
 
 `links.yml` の `icon` には Font Awesome のクラス名のほか、`svg:x` / `svg:qiita`（内蔵 SVG）、`text:VR`（文字アイコン）が使えます。

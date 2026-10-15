@@ -93,6 +93,18 @@ ${lis}
       })
       .join('\n');
   },
+
+  partners({ partners, partners_note, partners_empty }) {
+    const lis = partners
+      .map(
+        (p) =>
+          `    <li><a href="${esc(p.url)}" target="_blank">${esc(p.name)}</a>${p.desc ? ` - ${esc(p.desc)}` : ''}<br>\n        <font size="2">${esc(p.url)}</font></li>`,
+      )
+      .join('\n');
+    const list = partners.length ? `<ul>\n${lis}\n</ul>` : `<p>\n    ${esc(partners_empty ?? '')}\n</p>`;
+    const note = partners_note ? `\n<hr>\n<p>\n    ${esc(partners_note)}\n</p>\n` : '';
+    return `${list}\n${note}`;
+  },
 };
 
 export function layout(ctx, content) {

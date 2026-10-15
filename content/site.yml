@@ -64,6 +64,14 @@ nav:
     heading_ja: デバイス・スペック一覧
     icon: fa-solid fa-microchip
     lead: 普段使っている PC、サーバー、ガジェットと、その用途です。
+  - id: partners
+    file: partners.html
+    label: Partners
+    label_ja: 相互リンク
+    title: Link Exchange
+    heading_ja: 相互リンク
+    icon: fa-solid fa-handshake
+    lead: 相互リンクをしているサイトの一覧です。クリックすると新しいタブで開きます。
 
 # ---------- 旧URLからの転送（古いリンクが 404 にならないように） ----------
 #  「旧ファイル名: 転送先」。全モードに転送ページを作ります。不要になったら消してOK。

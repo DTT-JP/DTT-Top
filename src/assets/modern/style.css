@@ -451,6 +451,10 @@ img { max-width: 100%; }
 .link-go { margin-left: auto; color: var(--muted); font-size: 12px; transition: color 0.2s; }
 .link-item:hover .link-go { color: var(--accent); }
 
+/* 相互リンク（外部サイト）: 説明文つきの行 */
+.partner-desc { color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+.partner-list + .note { margin-top: 20px; }
+
 /* ---------- フッター ---------- */
 .site-footer { border-top: 1px solid var(--line); }
 .footer-inner {

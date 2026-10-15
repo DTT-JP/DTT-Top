@@ -143,6 +143,21 @@ export const pages = {
       <p>${esc(page.lead ?? '')}</p>
       ${sections}`;
   },
+
+  partners({ page, partners, partners_note, partners_empty }) {
+    const body = partners.length
+      ? kv(
+          partners.map((p) => [p.name, `${extLink(p.url, p.url)}${p.desc ? `<br>${esc(p.desc)}` : ''}`]),
+          150,
+        )
+      : `<p>${esc(partners_empty ?? '')}</p>`;
+    const note = partners_note ? `<br><p><font size="2">${esc(partners_note)}</font></p>` : '';
+    return `
+      ${head(page.heading_ja)}
+      <br>
+      <p>${esc(page.lead ?? '')}</p>
+      ${body}${note}`;
+  },
 };
 
 // ---------- 共通レイアウト ----------

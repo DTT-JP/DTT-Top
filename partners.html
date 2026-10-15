@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- このファイルは自動生成されています。直接編集せず content/ か src/ を編集してください。 -->
+<html lang="ja" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Link Exchange - DTTJP.com</title>
+  <meta name="description" content="高校生 DTT のポートフォリオ。制作物・使える技術・使っているデバイス・SNS をまとめています。">
+  <meta name="theme-color" content="#080c13">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <script>
+    // 初回描画前にテーマとプリローダー状態を決める（ちらつき防止）
+    (function () {
+      var d = document.documentElement, t = null;
+      d.classList.add('js');
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      d.setAttribute('data-theme', t);
+      try {
+        var n = performance.getEntriesByType('navigation')[0];
+        if (sessionStorage.getItem('site_entered') && !(n && n.type === 'reload')) d.classList.add('skip-preloader');
+      } catch (e) {}
+      setTimeout(function () { d.classList.add('loaded'); }, 3000); // main.js が読めなかった時の保険
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="preloader" aria-hidden="true">
+    <div class="loader-logo">DTTJP<span>.com</span></div>
+  </div>
+  <div class="bg-deco" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">DTTJP<span>.com</span></a>
+      <nav class="nav" aria-label="メインメニュー">
+        <a class="nav-link" href="index.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About</span></a>
+        <a class="nav-link" href="works.html"><i class="fa-solid fa-cubes" aria-hidden="true"></i><span>Works</span></a>
+        <a class="nav-link" href="devices.html"><i class="fa-solid fa-microchip" aria-hidden="true"></i><span>Devices</span></a>
+        <a class="nav-link" href="partners.html" aria-current="page"><i class="fa-solid fa-handshake" aria-hidden="true"></i><span>Partners</span></a>
+      </nav>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="ライト / ダークを切り替え">
+        <i class="fa-solid fa-moon icon-for-dark" aria-hidden="true"></i>
+        <i class="fa-solid fa-sun icon-for-light" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="page">
+    <header class="page-head reveal" style="--i:0">
+      <p class="eyebrow">Partners</p>
+      <h1>Link Exchange</h1>
+      <p class="lead">相互リンクをしているサイトの一覧です。クリックすると新しいタブで開きます。</p>
+    </header>
+    <ul class="link-list partner-list">
+        <li class="reveal" style="--i:1">
+          <a class="link-item partner" href="https://meitetu.net/" target="_blank" rel="noopener noreferrer" aria-label="meitetuさん（新しいタブで開きます）">
+            <span class="icon-tile"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+            <span class="link-text">
+              <span class="link-label">meitetuさん</span>
+              <span class="link-handle">meitetu.net</span>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square link-go" aria-hidden="true"></i>
+          </a>
+        </li>
+    </ul>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; 2026 DTTJP.com</p>
+      <div class="mode-switch">
+        <span>Display Mode</span>
+        <div class="segmented" role="group" aria-label="表示モード">
+          <span class="seg is-active" aria-current="true">Modern <small>2014-2026+</small></span>
+          <a class="seg" href="s/partners.html">Retro <small>2000年前後</small></a>
+          <a class="seg" href="ss/partners.html">Vintage <small>Pre-IE4</small></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="main.js" defer></script>
+</body>
+</html>

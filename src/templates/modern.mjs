@@ -191,6 +191,32 @@ export const pages = {
     <div class="device-list">${sections}
     </div>`;
   },
+
+  partners({ page, partners, partners_note, partners_empty }) {
+    const items = partners
+      .map(
+        (p, i) => `
+        <li class="reveal" ${delay(i + 1)}>
+          <a class="link-item partner" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)}（新しいタブで開きます）">
+            ${iconTile(p.icon || 'fa-solid fa-link')}
+            <span class="link-text">
+              <span class="link-label">${esc(p.name)}</span>${p.desc ? `\n              <span class="partner-desc">${esc(p.desc)}</span>` : ''}
+              <span class="link-handle">${esc(host(p.url))}</span>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square link-go" aria-hidden="true"></i>
+          </a>
+        </li>`,
+      )
+      .join('');
+    const body = partners.length
+      ? `<ul class="link-list partner-list">${items}\n    </ul>`
+      : `<article class="card card-dashed reveal" ${delay(1)}>\n      ${iconTile('fa-solid fa-handshake')}\n      <p class="item-desc">${esc(partners_empty ?? '')}</p>\n    </article>`;
+    const note = partners_note
+      ? `\n    <p class="note reveal" ${delay(partners.length + 2)}><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>${esc(partners_note)}</span></p>`
+      : '';
+    return `${pageHead({ eyebrow: page.label, title: page.title, lead: page.lead })}
+    ${body}${note}`;
+  },
 };
 
 // ---------- 共通レイアウト ----------
