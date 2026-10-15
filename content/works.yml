@@ -72,6 +72,20 @@ works:
         url: https://pglearn.dttjp.com/
         kind: primary
 
+  - title: MadoBakoCode
+    icon: fa-solid fa-code
+    desc: HTML・CSS・JavaScript のコードをブラウザ上で実行できる環境です。各種ファイルにも対応しています
+    tech: [Vite, Service Worker, HTML, CSS, JavaScript]
+    background: Service Worker を使用し、ブラウザ内でサーバーを立てることでサーバーを立てるのと同等の実行環境を作成しています。
+    links:
+      - label: Open
+        url: https://mbc.dttjp.com/
+        kind: primary
+      - label: GitHub
+        url: https://github.com/DTT-JP/madobakocode
+        kind: secondary
+        icon: fa-brands fa-github
+
 # 「準備中」カード。不要なら coming_soon: を丸ごと消してください。
 coming_soon:
   title: More coming soon
