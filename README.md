@@ -37,15 +37,17 @@ dtt-top/
 │  └─ assets/
 │     ├─ modern/style.css, main.js   通常版の CSS / JS の元
 │     └─ retro/style.css, bg.gif, rainbow.gif   レトロ版の CSS と画像の元
+│  （templates/notfound.mjs は 404 ページの型。下記「404 ページ」参照）
 ├─ package.json / package-lock.json  依存パッケージ (js-yaml のみ)
 ├─ favicon.png                       アイコン兼アバター画像
 │
 │  ── ここから下は自動生成（直接編集しない）──
 ├─ index.html works.html devices.html partners.html
 ├─ projects.html services.html links.html   （旧URL → 新ページへの転送）
+├─ 404.html                 （存在しない URL 用。Cloudflare Pages に必須）
 ├─ style.css main.js
-├─ s/    …レトロ版（4ページ + 転送 + style.css + 画像）
-└─ ss/   …ヴィンテージ版（4ページ + 転送）
+├─ s/    …レトロ版（4ページ + 転送 + 404.html + style.css + 画像）
+└─ ss/   …ヴィンテージ版（4ページ + 転送 + 404.html）
 ```
 
 > 自動生成されるファイルを直接編集しても、次のビルドで上書きされます。必ず `content/` か `src/` を編集してください。
@@ -198,9 +200,24 @@ git push origin main
 
 ## 7. 外部サービス側で必要な設定
 
-- このプロジェクトに必要な外部サービスの設定は **ありません**（GitHub Actions も使いません）。
-- 生成した HTML をリポジトリにそのまま commit する方式なので、**現在の公開設定を変える必要はありません**。
-- このリポジトリには `CNAME` ファイルなどが無く、公開先が GitHub Pages かどうかをリポジトリの内容だけでは判断できませんでした（**要確認**）。どの公開先でも「リポジトリ直下のファイルをそのまま配信する」設定のままで動きます。
+- 外部サービスの登録・API キーは **ありません**（GitHub Actions も使いません）。
+- 公開先は Cloudflare Pages を想定しています。設定は「ビルドコマンドなし／ビルド出力ディレクトリ = リポジトリ直下（`/`）」のままで動きます（Cloudflare 側の画面名・項目名は変わることがあるため、**要確認**）。
+- **404 ページ（`404.html`）は必須です。** Cloudflare Pages は、プロジェクト直下に `404.html` が無いと単一ページアプリ（SPA）とみなし、存在しない URL にも `index.html` を返します（公式ドキュメント: https://developers.cloudflare.com/pages/configuration/serving-pages/ ）。このリポジトリでは `npm run build` が `404.html` を自動生成するので、**消さずに一緒に push してください**。
+
+### 404 ページ
+
+モードごとに 3 枚あります。Cloudflare Pages は「アクセスされた URL に一番近い階層の 404.html」を使います（同ドキュメントに `/blog/404.html` の例あり）。
+
+| 存在しない URL の例 | 表示される 404 | 見た目 |
+|---|---|---|
+| `/abc`, `/a/b/c.txt` | `/404.html` | 通常版 |
+| `/s/abc`, `/s/a/b` | `/s/404.html` | レトロ版 |
+| `/ss/abc`, `/ss/a/b` | `/ss/404.html` | ヴィンテージ版（CSS なし） |
+
+- 生成元は `src/templates/notfound.mjs` です（`modern` / `retro` / `vintage` の 3 関数）。文言やデザインを変えるときはここを編集して `npm run build` します。
+- 404 ページは **どんな深さの URL でも同じファイルが表示される** ため、CSS・画像・リンクは `/` から始まる絶対パスで書いています。相対パスにすると、`/a/b/c` のような URL で CSS や画像が読めず崩れます。
+- `404.html` 以外のエラーページ（403 など）は、Cloudflare Pages では用意できません（要確認: 公式ドキュメントに記載があるのは 404 のみ）。
+- デプロイ後、`https://（自分のドメイン）/abc`、`/s/abc`、`/ss/abc` が、どれも **404 のステータス** で、それぞれのモードの 404 ページになることを確認してください。
 
 ## 8. トラブルシュート
 

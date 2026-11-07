@@ -83,8 +83,8 @@ categories:
           Storage: BlockStorage 50GB
           OS: Ubuntu 24.04 LTS
       - name: oci-amd02(VPS)
-        role: 公開用 その2
-        desc: 外部公開用のサーバーその 2 です。
+        role: 監視、管理用
+        desc: 外部公開せずに監視や管理のために使用すサーバーです。
         specs:
           CPU: Oracle E2.1.Micro 1OCPU
           RAM: 1GB
@@ -97,8 +97,10 @@ categories:
     icon: fa-solid fa-mobile-screen-button
     kind: simple
     items:
-      - name: スマホ
+      - name: サブスマホ
         desc: "AQUOS wish 3 (通称: Gomios)"
+      - name: メインスマホ
+        desc: "Nothing Phone (3a) 12GB/128GB Rakuten版"
       - name: iPad
         desc: iPad A16 Wi-Fi + Cellularモデル 128GB
       - name: スタイラスペン

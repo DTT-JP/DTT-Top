@@ -11,6 +11,7 @@ import { GENERATED_NOTE, redirectPage } from './lib.mjs';
 import * as modern from './templates/modern.mjs';
 import * as retro from './templates/retro.mjs';
 import * as vintage from './templates/vintage.mjs';
+import * as notfound from './templates/notfound.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK_ONLY = process.argv.includes('--check');
@@ -87,6 +88,14 @@ for (const mode of data.modes) {
   for (const [from, to] of Object.entries(data.redirects ?? {})) {
     out.set(join(mode.dir, from), redirectPage(to));
   }
+}
+
+// 404 ページ（モードごと）。Cloudflare Pages は「URL に一番近い階層の 404.html」を使う。
+//   /404.html（通常版）, /s/404.html（レトロ版）, /ss/404.html（ヴィンテージ版）
+// トップ階層に 404.html が無いと Pages は「SPA」とみなし、存在しない URL にも
+// index.html を 200 OK で返してしまうため、/404.html は必ず生成する。
+for (const mode of data.modes) {
+  out.set(join(mode.dir, '404.html'), notfound[mode.id]({ ...data, mode }));
 }
 
 // 通常版の CSS / JS、レトロ版の CSS は src/assets からコピー（先頭に注意書きを付ける）
